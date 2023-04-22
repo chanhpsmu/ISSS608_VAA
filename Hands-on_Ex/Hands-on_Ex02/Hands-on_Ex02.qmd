@@ -140,7 +140,6 @@ Note that:
 
 It is not unusual that multiple graphs are required to tell a compelling visual story. There are several ggplot2 extensions provide functions to compose figure with multiple graphs. In this section, we learn how to create composite plot by combining multiple graphs. First, let us create three statistical graphics by using the code chunk below.
 
-hrbrthemes::import_roboto_condensed()
 
 ```{r}
 p1 <- ggplot(data=exam_data, 
