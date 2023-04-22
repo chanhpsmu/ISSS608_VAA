@@ -184,7 +184,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">2.1 Overview</a></li>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">2.2 Getting Started</a>
+  <ul class="collapse">
+  <li><a href="#install-and-launch-r-packages" id="toc-install-and-launch-r-packages" class="nav-link" data-scroll-target="#install-and-launch-r-packages">Install and launch R packages</a></li>
+  <li><a href="#importing-data" id="toc-importing-data" class="nav-link" data-scroll-target="#importing-data">Importing Data</a></li>
+  </ul></li>
+  <li><a href="#beyond-ggplot2-annotation-ggrepel" id="toc-beyond-ggplot2-annotation-ggrepel" class="nav-link" data-scroll-target="#beyond-ggplot2-annotation-ggrepel">2.3 Beyond ggplot2 Annotation: ggrepel</a></li>
+  <li><a href="#beyond-ggplot2-themes" id="toc-beyond-ggplot2-themes" class="nav-link" data-scroll-target="#beyond-ggplot2-themes">2.4 Beyond ggplot2 Themes</a>
+  <ul class="collapse">
+  <li><a href="#working-with-hrbthems-package" id="toc-working-with-hrbthems-package" class="nav-link" data-scroll-target="#working-with-hrbthems-package">Working with hrbthems package</a></li>
+  </ul></li>
+  <li><a href="#beyond-single-graph" id="toc-beyond-single-graph" class="nav-link" data-scroll-target="#beyond-single-graph">2.5 Beyond Single Graph</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -211,15 +228,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<p>2.1 Overview</p>
+<section id="overview" class="level1">
+<h1>2.1 Overview</h1>
 <p>This chapter introduces several ggplot2 extensions for creating more elegant and effective statistical graphics. We will be able to:</p>
 <ul>
 <li><p>control the placement of annotation on a graph by using functions provided in ggrepel package,</p></li>
 <li><p>create professional publication quality figure by using functions provided in ggthemes and hrbrthemes packages,</p></li>
 <li><p>plot composite figure by combining ggplot2 graphs by using patchwork package.</p></li>
 </ul>
-<p>2.2 Getting Started</p>
-<p>Install and launch R packages</p>
+</section>
+<section id="getting-started" class="level1">
+<h1>2.2 Getting Started</h1>
+<section id="install-and-launch-r-packages" class="level3">
+<h3 class="anchored" data-anchor-id="install-and-launch-r-packages">Install and launch R packages</h3>
 <p>The code chunk below below will be used to check if these packages have been installed and also will load them onto the working R environment.</p>
 <ul>
 <li><p>ggrepel: an R package provides geoms for ggplot2 to repel overlapping text labels.</p></li>
@@ -232,7 +253,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>               ggthemes, hrbrthemes,</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>               tidyverse) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Importing Data</p>
+</section>
+<section id="importing-data" class="level3">
+<h3 class="anchored" data-anchor-id="importing-data">Importing Data</h3>
 <p>The code chunk below imports exam_data.csv into R environment by using read_csv() function of readr package. readr is one of the tidyverse package.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>exam_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/Exam_data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -247,7 +270,10 @@ dbl (3): ENGLISH, MATHS, SCIENCE
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
 </div>
-<p>2.3 Beyond ggplot2 Annotation: ggrepel</p>
+</section>
+</section>
+<section id="beyond-ggplot2-annotation-ggrepel" class="level1">
+<h1>2.3 Beyond ggplot2 Annotation: ggrepel</h1>
 <p>One of the challenge in plotting statistical graph is annotation, especially with large number of data points.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>exam_data, </span>
@@ -294,7 +320,9 @@ increasing max.overlaps</code></pre>
 <p><img src="Hands-on_Ex02_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>2.4 Beyond ggplot2 Themes</p>
+</section>
+<section id="beyond-ggplot2-themes" class="level1">
+<h1>2.4 Beyond ggplot2 Themes</h1>
 <p>ggthemes provides ‘ggplot2’ themes that replicate the look of plots by Edward Tufte, Stephen Few, Fivethirtyeight, The Economist, ‘Stata’, ‘Excel’, and The Wall Street Journal, among others. In the example below, The Economist theme is used.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>exam_data, </span>
@@ -309,7 +337,8 @@ increasing max.overlaps</code></pre>
 <p><img src="Hands-on_Ex02_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Working with hrbthems package</p>
+<section id="working-with-hrbthems-package" class="level3">
+<h3 class="anchored" data-anchor-id="working-with-hrbthems-package">Working with hrbthems package</h3>
 <p>hrbrthemes package provides a base theme that focuses on typographic elements, including where various labels are placed as well as the fonts that are used.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>exam_data, </span>
@@ -438,7 +467,10 @@ family not found in Windows font database</code></pre>
 <li><p>base_size argument is used to increase the default axis label to 15, and</p></li>
 <li><p>grid argument is used to remove the x-axis grid lines.</p></li>
 </ul>
-<p>2.5 Beyond Single Graph</p>
+</section>
+</section>
+<section id="beyond-single-graph" class="level1">
+<h1>2.5 Beyond Single Graph</h1>
 <p>It is not unusual that multiple graphs are required to tell a compelling visual story. There are several ggplot2 extensions provide functions to compose figure with multiple graphs. In this section, we learn how to create composite plot by combining multiple graphs. First, let us create three statistical graphics by using the code chunk below.</p>
 <p>hrbrthemes::import_roboto_condensed()</p>
 <div class="cell">
@@ -476,6 +508,7 @@ family not found in Windows font database</code></pre>
 </div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

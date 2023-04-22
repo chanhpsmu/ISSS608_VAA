@@ -4,7 +4,7 @@ author: "Hin Phung"
 editor: visual
 ---
 
-2.1 Overview
+# 2.1 Overview
 
 This chapter introduces several ggplot2 extensions for creating more elegant and effective statistical graphics. We will be able to:
 
@@ -14,9 +14,9 @@ This chapter introduces several ggplot2 extensions for creating more elegant and
 
 -   plot composite figure by combining ggplot2 graphs by using patchwork package.
 
-2.2 Getting Started
+# 2.2 Getting Started
 
-Install and launch R packages
+### Install and launch R packages
 
 The code chunk below below will be used to check if these packages have been installed and also will load them onto the working R environment.
 
@@ -35,7 +35,7 @@ pacman::p_load(ggrepel, patchwork,
 
 ```
 
-Importing Data
+### Importing Data
 
 The code chunk below imports exam_data.csv into R environment by using read_csv() function of readr package. readr is one of the tidyverse package.
 
@@ -43,7 +43,7 @@ The code chunk below imports exam_data.csv into R environment by using read_csv(
 exam_data <- read_csv("data/Exam_data.csv")
 ```
 
-2.3 Beyond ggplot2 Annotation: ggrepel
+# 2.3 Beyond ggplot2 Annotation: ggrepel
 
 One of the challenge in plotting statistical graph is annotation, especially with large number of data points.
 
@@ -81,7 +81,7 @@ ggplot(data=exam_data,
 
 ```
 
-2.4 Beyond ggplot2 Themes
+# 2.4 Beyond ggplot2 Themes
 
 ggthemes provides 'ggplot2' themes that replicate the look of plots by Edward Tufte, Stephen Few, Fivethirtyeight, The Economist, 'Stata', 'Excel', and The Wall Street Journal, among others. In the example below, The Economist theme is used.
 
@@ -97,7 +97,7 @@ ggplot(data=exam_data,
 
 ```
 
-Working with hrbthems package
+### Working with hrbthems package
 
 hrbrthemes package provides a base theme that focuses on typographic elements, including where various labels are placed as well as the fonts that are used.
 
@@ -136,8 +136,7 @@ Note that:
 
 -   grid argument is used to remove the x-axis grid lines.
 
-
-2.5 Beyond Single Graph
+# 2.5 Beyond Single Graph
 
 It is not unusual that multiple graphs are required to tell a compelling visual story. There are several ggplot2 extensions provide functions to compose figure with multiple graphs. In this section, we learn how to create composite plot by combining multiple graphs. First, let us create three statistical graphics by using the code chunk below.
 
@@ -168,7 +167,6 @@ p2 <- ggplot(data=exam_data,
   ggtitle("Distribution of English scores")
 ```
 
-
 Lastly, we will draw a scatterplot for English score versus Maths score by as shown below:
 
 ```{r}
@@ -183,4 +181,3 @@ p3 <- ggplot(data=exam_data,
   ggtitle("English scores versus Maths scores for Primary 3")
 
 ```
-
