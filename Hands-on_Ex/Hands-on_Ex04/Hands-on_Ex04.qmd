@@ -338,8 +338,8 @@ Plot the 95% confidence interval of mean maths score by race. The error bars sho
 ggplot(my_sum) +
   geom_errorbar(
     aes(x=RACE, 
-        ymin=mean-se, 
-        ymax=mean+se), 
+        ymin=mean-1.96*se, 
+        ymax=mean+1.96*se), 
     width=0.2, 
     colour="black", 
     alpha=0.9, 
@@ -351,7 +351,7 @@ ggplot(my_sum) +
            color="red",
            size = 1.5,
            alpha=1) +
-  ggtitle("Standard error of mean 
+  ggtitle("95% cobfidence interval of mean 
           maths score by race")
 
 ```
@@ -701,3 +701,47 @@ fp_ggplotly <- ggplotly(p,
 fp_ggplotly
 
 ```
+
+
+
+
+##########################################################################
+
+#### 10.2.3 Visualizing the uncertainty of point estimates: ggplot2 methods
+
+Plot the 95% confidence interval of mean maths score by race. The error bars should be sorted by the average maths scores.
+
+```{r}
+my_sum %>%
+  ggplot(aes(reorder(RACE,-mean), mean)) +
+  geom_errorbar(
+    aes(x=RACE, 
+        ymin=mean-1.96*se, 
+        ymax=mean+1.96*se), 
+    width=0.2, 
+    colour="black", 
+    alpha=0.9, 
+    size=0.5) +
+  geom_point(aes
+           (x=RACE, 
+            y=mean), 
+           stat="identity", 
+           color="red",
+           size = 1.5,
+           alpha=1) +
+  ggtitle("95% cobfidence interval of mean 
+          maths score by race")
+
+```
+
+
+
+
+#### 10.2.4 Visualising the uncertainty of point estimates with interactive error bars
+
+Plot interactive error bars for the 99% confidence interval of mean maths score by race.
+
+
+#### 10.3.2 Visualising the certainty of point estimates: ggdist methods
+
+Makeover the plot on previous slide by showing 95% and 99% confidence intervals.

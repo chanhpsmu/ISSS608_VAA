@@ -1,0 +1,118 @@
+---
+title: "In-Class Exercise 4"
+author: "Hin Phung"
+date: "6 May 2023"
+execute:
+  echo: true
+  eval: true
+  warning: false
+editor: visual
+---
+
+```{r}
+pacman::p_load(rstatix, gt, patchwork, tidyverse)
+
+```
+
+```{r}
+exam_data <-read_csv("data/Exam_data.csv")
+
+```
+
+Plot Q-Q plot. 
+Conversely, if the points deviate significantly from straight diagonal line, it is less likely that data is normally distributed.
+
+```{r}
+ggplot(exam_data,
+       aes(sample=ENGLISH)) +
+  stat_qq() +
+  stat_qq_line()
+
+```
+
+
+Create a tab to toggle between code chunk and plot
+
+:::panel-tabset
+
+## The plot
+```{r}
+#| echo: false
+#| fig-width: 4
+#| fig-height: 4
+ggplot(exam_data,
+       aes(sample=ENGLISH)) +
+  stat_qq() +
+  stat_qq_line()
+
+```
+
+## The code chunk
+```{r}
+#| eval: false
+#| fig-width: 4
+#| fig-height: 4
+ggplot(exam_data,
+       aes(sample=ENGLISH)) +
+  stat_qq() +
+  stat_qq_line()
+
+```
+
+:::
+
+Create a call-out as notes.
+
+::: {.callout-note}
+We can see that the points deviate significant from the straight diagonal line. This is a clear indication thatr the data is not normally distributed.
+:::
+
+
+:::panel-tabset
+
+## The plot
+```{r}
+#| echo: FALSE
+qq <- ggplot(exam_data,
+       aes(sample=ENGLISH)) +
+  stat_qq() +
+  stat_qq_line()
+  
+sw_t <- exam_data %>%
+   shapiro_test(ENGLISH) %>%
+   gt()
+ 
+tmp <- tempfile(fileext = '.png')
+gtsave(sw_t, tmp)
+table_png <- png::readPNG(tmp, native= TRUE)
+ 
+qq + table_png
+ 
+
+```
+
+## The code chunk
+```{r}
+#| eval: FALSE
+qq <- ggplot(exam_data,
+       aes(sample=ENGLISH)) +
+  stat_qq() +
+  stat_qq_line()
+  
+sw_t <- exam_data %>%
+   shapiro_test(ENGLISH) %>%
+   gt()
+ 
+tmp <- tempfile(fileext = '.png')
+gtsave(sw_t, tmp)
+table_png <- png::readPNG(tmp, native= TRUE)
+ 
+qq + table_png
+ 
+
+```
+
+:::
+
+
+
