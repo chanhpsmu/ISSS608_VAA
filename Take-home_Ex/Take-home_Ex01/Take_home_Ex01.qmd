@@ -571,7 +571,7 @@ An animated bubble plot is created to show the trend of the percentage of total 
 
 ### 4.7 Visualising Financial Health with Other Population Demographics
 
-Using the Tree map, we can have an insight on the population demography and relative percentage of wages they save by comparing the size of boxes in the plot. Key insights that can be drawn are (i) For residents without kids, the graduates group is the highest in terms of percentage of income saved, and (ii) Residents of low educational qualification has the least percentage of income saved regardless of having kids.
+Using the Tree map, we can develop an insight on the population demography and relative percentage of wages they save by comparing the size of boxes in the plot. Key insights that can be drawn are (i) For residents without kids, the graduates group is the highest in terms of percentage of income saved, and (ii) Residents of low educational qualification has the least percentage of income saved regardless of having kids.
 
 ```{r}
 #| code-fold: true
@@ -606,3 +606,5 @@ https://towardsdatascience.com/parametric-tests-the-t-test-c9b17faabfb0
 https://stats.stackexchange.com/questions/341553/what-is-bayesian-posterior-probability-and-how-is-it-different-to-just-using-a-p
 
 http://www.cookbook-r.com/Graphs/Colors\_(ggplot2)/
+
+
