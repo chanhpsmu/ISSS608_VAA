@@ -599,6 +599,8 @@ https://www.rapidtables.com/math/symbols/Statistical_Symbols.html
 
 https://www.scribbr.com/statistics/t-test/
 
+
+
 https://towardsdatascience.com/parametric-tests-the-t-test-c9b17faabfb0
 
 https://stats.stackexchange.com/questions/341553/what-is-bayesian-posterior-probability-and-how-is-it-different-to-just-using-a-p
