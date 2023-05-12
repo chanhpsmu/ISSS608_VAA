@@ -335,6 +335,8 @@ ggplot(my_sum) +
 Plot the 95% confidence interval of mean maths score by race. The error bars should be sorted by the average maths scores.
 
 ```{r}
+my_sum$RACE = with(my_sum, reorder(RACE,-mean))
+
 ggplot(my_sum) +
   geom_errorbar(
     aes(x=RACE, 
@@ -359,6 +361,56 @@ ggplot(my_sum) +
 #### 10.2.4 Visualising the uncertainty of point estimates with interactive error bars
 
 Plot interactive error bars for the 99% confidence interval of mean maths score by race.
+
+
+```{r}
+
+My_sum2 <- rename(my_sum, c("No. of pupils" = n, "Ave Scores" = mean, "Std Dev" = sd, "Std Error" = se))
+
+My_sum2
+
+```
+
+```{r}
+DT::datatable(My_sum2, class= "compact")
+
+```
+
+`
+```{r}
+
+
+d <- highlight_key(My_sum2) 
+p <- ggplot(my_sum) +
+  geom_errorbar(
+    aes(x=RACE, 
+        ymin=mean-2.58*se, 
+        ymax=mean+2.58*se), 
+    width=0.2, 
+    colour="black", 
+    alpha=0.9, 
+    size=0.5) +
+  geom_point(aes
+           (x=RACE, 
+            y=mean), 
+           stat="identity", 
+           color="red",
+           size = 1.5,
+           alpha=1) +
+  ggtitle("95% cobfidence interval of mean 
+          maths score by race")
+
+gg <- highlight(ggplotly(p),        
+                "plotly_selected")  
+
+crosstalk::bscols(gg,               
+                  DT::datatable(d), 
+                  widths = 5)        
+
+```
+
+
+
 
 ### 10.3 Visualising Uncertainty: ggdist package
 
@@ -401,6 +453,23 @@ exam %>%
 #### 10.3.2 Visualising the certainty of point estimates: ggdist methods
 
 Makeover the plot on previous slide by showing 95% and 99% confidence intervals.
+
+```{r}
+exam %>%
+  ggplot(aes(x = RACE, 
+             y = MATHS)) +
+  stat_pointinterval(
+    show.legend = FALSE) +   
+  labs(
+    title = "Visualising confidence intervals of mean math score",
+    subtitle = "Mean Point + Multiple-interval plot")
+
+```
+
+
+
+
+
 
 #### 10.3.3 Visualising the certainty of point estimates: ggdist methods
 
@@ -712,8 +781,10 @@ fp_ggplotly
 Plot the 95% confidence interval of mean maths score by race. The error bars should be sorted by the average maths scores.
 
 ```{r}
-my_sum %>%
-  ggplot(aes(reorder(RACE,-mean), mean)) +
+
+my_sum$RACE = with(my_sum, reorder(RACE,-mean))
+
+ggplot(my_sum) +
   geom_errorbar(
     aes(x=RACE, 
         ymin=mean-1.96*se, 
@@ -732,6 +803,7 @@ my_sum %>%
   ggtitle("95% cobfidence interval of mean 
           maths score by race")
 
+
 ```
 
 
@@ -741,7 +813,85 @@ my_sum %>%
 
 Plot interactive error bars for the 99% confidence interval of mean maths score by race.
 
+```{r}
+
+My_sum2 <- rename(my_sum, c("No. of pupils" = n, "Ave Scores" = mean, "Std Dev" = sd, "Std Error" = se))
+
+My_sum2
+
+```
+
+```{r}
+DT::datatable(My_sum2, class= "compact")
+
+```
+
+`
+```{r}
+
+
+d <- highlight_key(My_sum2) 
+p <- ggplot(my_sum) +
+  geom_errorbar(
+    aes(x=RACE, 
+        ymin=mean-2.58*se, 
+        ymax=mean+2.58*se), 
+    width=0.2, 
+    colour="black", 
+    alpha=0.9, 
+    size=0.5) +
+  geom_point(aes
+           (x=RACE, 
+            y=mean), 
+           stat="identity", 
+           color="red",
+           size = 1.5,
+           alpha=1) +
+  ggtitle("95% cobfidence interval of mean 
+          maths score by race")
+
+gg <- highlight(ggplotly(p),        
+                "plotly_selected")  
+
+crosstalk::bscols(gg,               
+                  DT::datatable(d), 
+                  widths = 5)        
+
+```
+
+
+
+
 
 #### 10.3.2 Visualising the certainty of point estimates: ggdist methods
 
 Makeover the plot on previous slide by showing 95% and 99% confidence intervals.
+
+
+```{r}
+exam %>%
+  ggplot(aes(x = RACE, y = MATHS)) +
+  stat_pointinterval(.width = 0.95,
+                     .point = median,
+                     .interval = "confidence",
+                     level = 0.95) +
+  labs(
+    title = "Visualising confidence intervals of mean math score",
+    subtitle = "Mean Point + Multiple-interval plot (95% confidence intervals)"
+  )
+```
+
+
+```{r}
+exam %>%
+  ggplot(aes(x = RACE, y = MATHS)) +
+  stat_pointinterval(.width = 0.95,
+                     .point = median,
+                     .interval = "confidence",
+                     level = 0.99) +
+  labs(
+    title = "Visualising confidence intervals of mean math score",
+    subtitle = "Mean Point + Multiple-interval plot (99% confidence intervals)"
+  )
+```
+

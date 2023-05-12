@@ -2,6 +2,7 @@
 title: "In-Class Exercise 4"
 author: "Hin Phung"
 date: "6 May 2023"
+date-modified: "`r Sys.Date()`"
 execute:
   echo: true
   eval: true
