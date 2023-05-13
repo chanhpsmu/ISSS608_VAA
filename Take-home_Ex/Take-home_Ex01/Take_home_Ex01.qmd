@@ -140,7 +140,7 @@ if (nrow(duplicated_rows) > 0) {
 
 ```
 
-The dataset is pivoted to display the different categories of costs under different columns.
+The dataset is pivoted to display the different categories of costs as separate columns.
 
 ```{r}
 #| code-fold: true
@@ -182,7 +182,7 @@ Under the expenditure columns, there are negative integers that indicates outlay
 #| code-fold: true
 
 
-# Convert the values in a column (e.g., "value") to integer format
+# Convert the values in a column to positive integers, rounded to 2 decimal points
 fj1_pivoted$Education <- round(abs(fj1_pivoted$Education), 2)
 fj1_pivoted$Food <- round(abs(fj1_pivoted$Food), 2)
 fj1_pivoted$Recreation <- round(abs(fj1_pivoted$Recreation), 2)
@@ -200,6 +200,7 @@ Lastly, new columns for total income and total expenditures are created in the d
 
 fj1_pivoted$Total_income <- fj1_pivoted$Wage
 
+# creating new columns
 fj1_pivoted$Total_expenditure <- fj1_pivoted$Education + fj1_pivoted$Food + fj1_pivoted$Recreation + fj1_pivoted$Shelter_rev
 
 ```
@@ -256,11 +257,11 @@ glimpse(merged_df)
 
 # 4. Data Visualisation
 
-### 4.1 Total Expenditure and Income
+### 4.1 Total Expenditure and Total Income Distributions
 
 To have an overview on the financial behaviour of the residents, one-sample mean test on the total expenditure for all 1011 representative participants is carried out based on 95% confidence interval.
 
-The output shows that the distribution is relatively uniformly distributed. It is observed that the average total expenditure of the population is 18,087 dollars. This almost coincides with the peak value at about 17,500 dollars of nearly 80 counts. It is noted that there were 131 participants with total expenditure values less than 1000 dollars. They are treated as outliers and are excluded for all analysis.
+The output shows that the distribution is relatively uniformly distributed. It is observed that the average total expenditure of the population is 18,087 dollars. This almost coincides with the peak value at about 17,500 dollars of nearly 80 counts. It is noted that there were 131 participants with total expenditure less than 1000 dollars. They are treated as outliers and are excluded for the analysis.
 
 ```{r}
 #| code-fold: true
@@ -269,7 +270,7 @@ merged_df1 <- merged_df
 
 library(dplyr)
 
-#Group by one column and summarize the other columns by sunming up the values within each group
+#Group by one column and summarize the other columns by summing up the values within each group
  Income_Exp_summary <- merged_df %>%
    group_by(`participantId`) %>%
    summarize(`Food` = sum(`Food`),
@@ -315,7 +316,7 @@ gghistostats(
 
 ```
 
-We also investigate the distribution of the Total income amount using histogram. Based on the output generated, it is observed that the distribution is heavily right skewed as Majority of the data is concentrated on the left-hand side of the distribution, with the tail of the distribution extending to the right. The average total expenditure of the population is 31,339 dollars.
+We also investigate the distribution of the total income amount using histogram. Based on the output generated, it is observed that the distribution is heavily right skewed as majority of data is concentrated on the left-hand side of the distribution, with the tail of the distribution extending to the right. The average total expenditure of the population is 31,339 dollars.
 
 ```{r}
 #| code-fold: true
@@ -332,14 +333,14 @@ gghistostats(
 
 ```
 
-### 4.2 Relationship between Income and Expenditure
+### 4.2 Relationship between Total Income and Total Expenditure
 
-Here, we would like to explore the relationship between the Total_income vs Total_expenditure of the population. To do so, We test the following hypothesis using significant Test of Correlation with ggscatterstats method.
+Here, we would like to explore the relationship between total income vs total expenditure of the population. We test the following hypothesis using significant Test of Correlation with ggscatterstats method.
 
--   Ho there is correlation between Total income and Total expenditure
--   H1: There is no correlation between Total income and Total expenditure
+-   Ho there is correlation between total income and total expenditure
+-   H1: There is no correlation between total income and total expenditure
 
-From the output of Student t test, the p value is \< 0.005. Thus we reject the hypothesis at 95% confidence level and conclude that there is no correlation between Total income and Total expenditure. The Pearson's correlation coefficient (r), which is a measure of the linear association between two variables, is -0.11 and that also indicates no correlation between the two variables tested.
+From the output of Student t test, the p value is \< 0.005. Thus we reject the hypothesis and conclude that there is no correlation between total income and total expenditure at 95% confidence interval. The Pearson's correlation coefficient (r), which is a measure of the linear association between two variables, is -0.11 and that also indicates non-correlation between the two variables tested.
 
 ```{r}
 #| code-fold: true
@@ -353,13 +354,15 @@ ggscatterstats(
 
 ```
 
-### 4.3 Trend of Total Expenditure every month
+### 4.3 Trend of Total Expenditure every Month
 
-For this analysis, we examine the Total expenditure distribution across the twelve months. The mean total expenditure is the highest in March 2022 at approximated amount of 1,700 dollars across all twelve months. We can infer this as a bonus payment for the working population likely due to successful agriculture harvest (based on the assumption that many of the city's population are employed in this related industry given that the city serves as a service centre of an agriculture region surrounding it)
+For this analysis, we examine the total expenditure distribution across the twelve months. The mean total expenditure is highest in March 2022 at approximated amount of 1,700 dollars. We can infer this as a bonus payment for the working population possibility due to successful agriculture harvest based on assumption that the City's population are largely employed in this industry (given that the city serves as a service centre of an agriculture region surrounding it).
 
 ```{r}
 #| code-fold: true
 #| warning: false
+
+
 
 merged_df %>%
   ggplot(aes(x = Month_Yr, 
@@ -394,9 +397,9 @@ ggplot(data = merged_df,
 
 ```
 
-### 4.4 Impact of Age on Total Expenditure
+### 4.4 Total Expenditure by Different Age Groups
 
-We plot multi-ridge plots to determine the total expenditure distribution across different participant age groups to have an idea of how different they could be. The 2 highest age groups register more movement in terms of the profile of the ride shape over the 12 months period while the 21 - 30 age group is relatively stable. It is also observed that the 11-20 age group fluctuates more towards the end of 2022 onwards.
+We create multi-ridge plots to determine the total expenditure distribution across different participant age groups to have an idea on how different they could be. The 2 highest age groups register more movements in terms of the ridge shape over the twelve months period while the 21 - 30 age group is relatively stable. It is also observed that the 11-20 age group has more fluctuations from end 2022 onwards.
 
 ```{r}
 #| code-fold: true
@@ -435,12 +438,9 @@ ggplot(data = merged_df_bin, aes(x = Total_expenditure, y = age, fill = after_st
   ease_aes('linear')
 
 
-
-
-
 ```
 
-To obtain deeper insights on the findings, We would like to determine if there are significant differences of the total expenditure between age groups, by performing ANOVA test using ggbetweenstats function for non-parametric test. We would assume unknown and unequal variance in this case.
+To obtain deeper insights on the findings, We would like to determine if there are significant differences of total expenditure between age groups, by performing ANOVA test using ggbetweenstats function for non-parametric test. We assume unknown and unequal variance in this case.
 
 -   Ho: the mean total expenditure amount is the same for all ages
 
@@ -476,7 +476,7 @@ ggbetweenstats(
 
 ### 4.5 Overall Population Financial Health
 
-To determine whether the population is in good financial health, we will develop a metric based on percentage of savings over income to determine the financial health status of the population.
+To determine whether the population is in good financial health, we will develop a metric based on percentage of savings over income to determine its financial health status.
 
 The columns are plotted based on various age groups and the highest mean percentage of savings based on 90% confidence interval is found to be 60.3% belonging to the age group from 21 to 30 years old. The lowest mean percentage of savings is 58.4% in the 41 to 50 years old group. We can infer that one of the reasons could be that residents at this age generally have relatively more demanding cost commitments as compared with other age groups. Overall, with the lowest mean percentage saving at \> 50%, we can conclude that the overall financial health of the population is positive.
 
@@ -527,9 +527,9 @@ girafe(ggobj = gg_point,
 
 ```
 
-### 4.6 Monthly Percentage of Savings vs Income
+### 4.6 Monthly Percentage of Expenses vs Income
 
-An animated bubble plot is created to show the trend of the percentage of total expenses vs total income for the sample participants over the period of twelve months to understand their spending trend using plotly method. It is not unexpected that participants of lower income group would have a higher percentage of expenses. It is also observed that there were some who had overspent (percentage of expenses \>100%).
+An animated bubble plot is created to show the trend of the percentage of total expenses vs total income for the sample participants over the period of twelve months to understand their spending trend using plotly method. It is not unexpected that participants of lower income group have higher percentage of expenses. It is also observed that there were some participants who overspent (percentage of expenses \>100%).
 
 ```{r}
 #| code-fold: true
@@ -571,7 +571,7 @@ An animated bubble plot is created to show the trend of the percentage of total 
 
 ### 4.7 Visualising Financial Health with Other Population Demographics
 
-Using the Tree map, we can develop an insight on the population demography and relative percentage of wages they save by comparing the size of boxes in the plot. Key insights that can be drawn are (i) For residents without kids, the graduates group is the highest in terms of percentage of income saved, and (ii) Residents of low educational qualification has the least percentage of income saved regardless of having kids.
+Using the Tree map, we can develop further understanding on the population demography and relative percentage of wages they save by comparing the size of boxes in the plot. Key insights that can be drawn are (i) For residents without kids, the graduates group is the highest in terms of percentage of income saved, and (ii) Residents of low educational qualification has the least percentage of income saved regardless of having kids.
 
 ```{r}
 #| code-fold: true
@@ -599,12 +599,8 @@ https://www.rapidtables.com/math/symbols/Statistical_Symbols.html
 
 https://www.scribbr.com/statistics/t-test/
 
-
-
 https://towardsdatascience.com/parametric-tests-the-t-test-c9b17faabfb0
 
 https://stats.stackexchange.com/questions/341553/what-is-bayesian-posterior-probability-and-how-is-it-different-to-just-using-a-p
 
 http://www.cookbook-r.com/Graphs/Colors\_(ggplot2)/
-
-

@@ -1,0 +1,138 @@
+---
+title: "In-class_Ex05"
+author: "Hin Phung"
+date: "13 May 2023"
+date-modified: "`r Sys.Date()`"
+execute:
+  echo: true
+  eval: true
+  warning: false
+editor: visual
+---
+
+Overview
+
+In this hands-on exercise, you will learn how to model, analyse and visualise network data using R.
+
+By the end of this hands-on exercise, you will be able to:
+
+create graph object data frames, manipulate them using appropriate functions of dplyr, lubridate, and tidygraph, build network graph visualisation using appropriate functions of ggraph, compute network geometrics using tidygraph, build advanced graph visualisation by incorporating the network geometrics, and build interactive network visualisation using visNetwork package.
+
+Getting Started
+
+Installing and launching R packages
+
+Four network data modelling and visualisation packages will be installed and launched. They are igraph, tidygraph, ggraph and visNetwork. Beside these four packages, tidyverse and lubridate, an R package specially designed to handle and wrangling time data will be installed and launched too.
+
+```{r}
+pacman::p_load(igraph, tidygraph, ggraph, 
+               visNetwork, lubridate, clock,
+               tidyverse, graphlayouts)
+
+```
+
+The Data
+
+The data sets used in this hands-on exercise is from an oil exploration and extraction company. There are two data sets. One contains the nodes data and the other contains the edges (also know as link) data.
+
+The edges data GAStech-email_edges.csv which consists of two weeks of 9063 emails correspondances between 55 employees.
+
+The nodes data GAStech_email_nodes.csv which consist of the names, department and title of the 55 employees.
+
+Importing network data from files In this step, you will import GAStech_email_node.csv and GAStech_email_edges-v2.csv into RStudio environment by using read_csv() of readr package.
+
+```{r}
+GAStech_nodes <- read_csv("data/GAStech_email_node.csv")
+
+GAStech_edges <- read_csv("data/GAStech_email_edge-v2.csv")
+
+```
+
+```{r}
+glimpse(GAStech_edges)
+
+```
+
+```{r}
+GAStech_edges <- GAStech_edges %>%
+  mutate(SendDate = dmy(SentDate)) %>%
+  mutate(Weekday = wday(SentDate,
+                        label = TRUE,
+                        abbr = FALSE))
+```
+
+```{r}
+glimpse(GAStech_edges)
+
+```
+
+```{r}
+GAStech_edges_aggregated <- GAStech_edges %>%
+  filter(MainSubject == "Work related") %>%
+  group_by(source, target, Weekday) %>%
+    summarise(Weight = n()) %>%
+  filter(source!=target) %>%
+  filter(Weight > 1) %>%
+  ungroup()
+
+```
+27.4.3 Using tbl_graph() to build tidygraph data model.
+
+```{r}
+GAStech_graph <- tbl_graph(nodes = GAStech_nodes,
+                           edges = GAStech_edges_aggregated, 
+                           directed = TRUE)
+```
+
+
+
+
+27.4.4 Reviewing the output tidygraph’s graph object
+
+```{r}
+GAStech_graph
+
+```
+
+
+
+
+```{r}
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+pacman::p_load(jsonlite, igraph, tidygraph, ggraph, 
+               visNetwork, lubridate, clock,
+               tidyverse, graphlayouts)
+
+```
+
+
+```{r}
+MC1 <- fromJSON("data/MC1.json")
+
+```
+
+```{r}
+MC1_nodes <- as_tibble(MC1$nodes) %>%
+  select(id, type, country)
+  
+```
+
+```{r}
+MC1_edges  <- as_tibble(MC1$links) %>%
+  select(source, target, type, weight, key)
+  
+```
