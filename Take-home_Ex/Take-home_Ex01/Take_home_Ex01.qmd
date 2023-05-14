@@ -340,7 +340,7 @@ Here, we would like to explore the relationship between total income vs total ex
 -   Ho there is correlation between total income and total expenditure
 -   H1: There is no correlation between total income and total expenditure
 
-From the output of Student t test, the p value is \< 0.005. Thus we reject the hypothesis and conclude that there is no correlation between total income and total expenditure at 95% confidence interval. The Pearson's correlation coefficient (r), which is a measure of the linear association between two variables, is -0.11 and that also indicates non-correlation between the two variables tested.
+From the output of Student t test, the p value is \< 0.05. Thus we reject the hypothesis and conclude that there is no correlation between total income and total expenditure at 95% confidence interval. The Pearson's correlation coefficient (r), which is a measure of the linear association between two variables, is -0.11 and that also indicates non-correlation between the two variables tested.
 
 ```{r}
 #| code-fold: true
@@ -446,7 +446,7 @@ To obtain deeper insights on the findings, We would like to determine if there a
 
 -   H1: the mean total expenditure amount is different for all ages
 
-Based on the output of the Welch's test, p \> 0.05 and therefore we do not reject the hypothesis that the mean total expenditure is the same for all age groups.
+Based on the output of the Welch's test, p \> 0.05 and therefore we cannot conclude that there is significant difference exists in the mean total expenditure amount for all age groups.
 
 ```{r}
 #| code-fold: true
@@ -478,7 +478,7 @@ ggbetweenstats(
 
 To determine whether the population is in good financial health, we will develop a metric based on percentage of savings over income to determine its financial health status.
 
-The columns are plotted based on various age groups and the highest mean percentage of savings based on 90% confidence interval is found to be 60.3% belonging to the age group from 21 to 30 years old. The lowest mean percentage of savings is 58.4% in the 41 to 50 years old group. We can infer that one of the reasons could be that residents at this age generally have relatively more demanding cost commitments as compared with other age groups. Overall, with the lowest mean percentage saving at \> 50%, we can conclude that the overall financial health of the population is positive.
+The columns are plotted based on various age groups and the highest mean percentage of savings based on 90% confidence interval is found to be 60.7% belonging to the age group from 21 to 30 years old. The lowest mean percentage of savings is 58.7% in the 41 to 50 years old group. We can infer that one of the reasons could be that residents at this age generally have relatively more demanding cost commitments as compared with other age groups. Overall, with the lowest mean percentage saving already more than 50%, we can conclude that the overall financial health of the population is positive.
 
 ```{r}
 #| code-fold: true
