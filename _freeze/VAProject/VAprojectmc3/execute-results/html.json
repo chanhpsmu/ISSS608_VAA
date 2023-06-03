@@ -1,0 +1,14 @@
+{
+  "hash": "2848aa00a27633d2edaa248a7f88a321",
+  "result": {
+    "markdown": "---\ntitle: \"Project\"\nauthor: \"Hin Phung\"\ndate: \"19 May 2023\"\ndate-modified: \"2023-06-02\"\nexecute:\n  echo: true\n  eval: true\n  warning: false\n  freeze: true\neditor: visual\n---\n\n::: {.cell}\n\n```{.r .cell-code  code-fold=\"true\"}\npacman::p_load(jsonlite, igraph, tidygraph, ggraph, \n               visNetwork, lubridate, clock,\n               tidyverse, graphlayouts)\n```\n:::\n\n::: {.cell}\n\n```{.r .cell-code  code-fold=\"true\"}\nread_mc3_nodes <- read_rds(\"data/mc3_nodes.rds\")\n```\n:::\n\n::: {.cell}\n\n```{.r .cell-code  code-fold=\"true\"}\nread_mc3_edges <- read_rds(\"data/mc3_edges.rds\")\n```\n:::\n\n\n\n#read_mc3_nodes <- read_rds(\"data/generated/mc3_nodes.rds\")\n#read_mc3_edges <- read_rds(\"data/generated/mc3_edges.rds\")",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

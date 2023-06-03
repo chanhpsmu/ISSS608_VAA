@@ -1,0 +1,14 @@
+{
+  "hash": "c1622e41637215ed5281ff1eef38bfc6",
+  "result": {
+    "markdown": "---\ntitle: \"In-class Exercise 6\"\nauthor: \"Hin Phung\"\ndate: \"19 May 2023\"\ndate-modified: \"2023-05-20\"\nexecute:\n  echo: true\n  eval: true\n  warning: false\n  freeze: true\neditor: visual\n\n---\n\n\nTesting",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
