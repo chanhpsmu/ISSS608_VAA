@@ -76,6 +76,7 @@ GAStech_edges_aggregated <- GAStech_edges %>%
   ungroup()
 
 ```
+
 27.4.3 Using tbl_graph() to build tidygraph data model.
 
 ```{r}
@@ -84,33 +85,19 @@ GAStech_graph <- tbl_graph(nodes = GAStech_nodes,
                            directed = TRUE)
 ```
 
-
-
-
-27.4.4 Reviewing the output tidygraph’s graph object
+27.4.4 Reviewing the output tidygraph's graph object
 
 ```{r}
 GAStech_graph
 
 ```
 
-
-
-
 ```{r}
 
 ```
 
 
-
-
-
-
-
-
-
-
-
+###############################################################################################################
 
 ```{r}
 pacman::p_load(jsonlite, igraph, tidygraph, ggraph, 
@@ -118,7 +105,6 @@ pacman::p_load(jsonlite, igraph, tidygraph, ggraph,
                tidyverse, graphlayouts)
 
 ```
-
 
 ```{r}
 MC1 <- fromJSON("data/MC1.json")

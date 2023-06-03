@@ -1,0 +1,15 @@
+---
+title: "In-class Exercise 6"
+author: "Hin Phung"
+date: "19 May 2023"
+date-modified: "`r Sys.Date()`"
+execute:
+  echo: true
+  eval: true
+  warning: false
+  freeze: true
+editor: visual
+
+---
+
+Testing
