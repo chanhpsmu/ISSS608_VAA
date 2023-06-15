@@ -310,11 +310,11 @@ tm_shape(mpsz_pop2020)+
   tm_borders(alpha = 0.5)
 ```
 
-### 21.4.4 Colour Scheme 
+### 21.4.4 Colour Scheme
 
 tmap supports colour ramps either defined by the user or a set of predefined colour ramps from the RColorBrewer package.
 
-#### 21.4.4.1 Using ColourBrewer palette 
+#### 21.4.4.1 Using ColourBrewer palette
 
 To change the colour, we assign the preferred colour to palette argument of tm_fill() as shown in the code chunk below.
 
