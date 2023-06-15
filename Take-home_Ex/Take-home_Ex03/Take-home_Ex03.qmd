@@ -1,0 +1,466 @@
+---
+title: "Take-Home Exercise 3"
+author: "Hin Phung"
+date: "9 Jun 2023"
+date-modified: "`r Sys.Date()`"
+execute:
+  echo: true
+  eval: true
+  warning: false
+  freeze: true
+editor: visual
+---
+
+
+# Overview
+
+### Introduction
+
+The country of Oceanus has sought FishEye International's help in identifying companies possibly engaged in illegal, unreported, and unregulated (IUU) fishing. FishEye's analysts had received import/export data for Oceanus' marine and fishing industries, but the data is incomplete. FishEye had subsequently transformed the trade data into a knowledge graph to help them understand the business relationships, including finding links that will stop IUU fishing and protect marine species.
+
+We will address Question 1 of VAST challenge 2023 MC3 - To Use visual analytics to identify anomalies in the business groups present in the knowledge graph
+
+### Methodology
+
+To use different visualisation techniques to identify relationships and anomalies of entities in the businesss groups.
+
+### Data Preparation
+
+#### Installing and loading of R packages
+
+The code chunk below will be used to install and load the necessary R packages as follows:
+
+-   jsonlite: a package supports both reading and writing JSON files, as well as working with JSON data retrieved from web APIs.
+
+-   igraph: a package in R that offers a wide range of tools for creating, manipulating, and visualizing graphs, as well as various algorithms and metrics for network analysis.
+
+-   tidygraph: provides a tidy and consistent approach to working with graph data using the principles of the tidyverse
+
+-   ggraph: an extension package in R that builds upon the tidygraph and ggplot2 packages. It provides a high-level interface for creating visualizations of graph data using the grammar of graphics approach.
+
+-   viznetwork: a package provides geoms for ggplot2 to repel overlapping text labels.
+
+-   graphlayouts: a package that provides a collection of layout algorithms that can be used to visualize graphs.
+
+-   ggforce: extension package for ggplot2 that provides additional functionalities and extensions to enhance and expand the capabilities of ggplot2 for data visualization.
+
+-   tidyverse: a family of modern R packages specially designed to support data science, analysis and communication task including creating static statistical graphs.
+
+-   scales: package that provides various functions for scaling and formatting data, primarily for data visualization purposes.
+
+-   wordcloud: package for creating word clouds, which are visual representations of textual data where the size of each word corresponds to its frequency or importance in the text.
+
+-   tm: text mining package that provides tools for text preprocessing, document-term matrix creation, and various other text mining tasks.
+
+-   treemap: a package that allows you to create treemaps, which are visualizations that display hierarchical data as nested rectangles.
+
+```{r}
+#| code-fold: true
+#| warning: false
+
+pacman::p_load(jsonlite, tidygraph, ggraph, 
+               visNetwork, graphlayouts, ggforce, 
+               skimr, tidytext, tidyverse, scales, wordcloud, tm, treemap)
+
+```
+
+# The Data
+
+The function fromJSON() of jsonlite package is used to import mc3.json into R environment. The data comprises:
+
+-   list of 27622 "nodes" with 5 columns (id, country, type, revenue_omu, project_services)
+
+-   list of 24038 "links" with 3 columns (source, target, type)
+
+```{r}
+#| code-fold: true
+#| warning: false
+#| 
+mc3_data <- fromJSON("data/MC3.json")
+```
+
+# Data Preparation
+
+The list of "links" are extracted to form an edge table. Correspondingly, the list of "nodes" are extracted to form a nodes table.
+
+```{r}
+#| code-fold: true
+#| warning: false
+
+#Extract edges from the list
+mc3_edges <- as_tibble(mc3_data$links) %>% 
+  distinct() %>%
+  mutate(source = as.character(source),
+         target = as.character(target),
+         type = as.character(type)) %>%
+  group_by(source, target, type) %>%
+    summarise(weights = n()) %>%
+  filter(source!=target) %>%
+  ungroup()
+```
+
+```{r}
+#| code-fold: true
+#| warning: false
+
+#Extract nodes from the list
+mc3_nodes <- as_tibble(mc3_data$nodes) %>%
+  mutate(country = as.character(country),
+         id = as.character(id),
+         product_services = as.character(product_services),
+         revenue_omu = as.numeric(as.character(revenue_omu)),
+         type = as.character(type)) %>%
+  select(id, country, type, revenue_omu, product_services)
+```
+
+# Data Exploration
+
+### Exploring edge table
+
+We first explore the created edge table. The report below reveals that there are not missing values in all fields.We also made comparison between Different types in the edge table. The bar graph below indicates that there are 2 types of entities in the edge table - company contacts and owners.
+
+```{r}
+#| code-fold: true
+#| warning: false
+skim(mc3_edges)
+```
+
+```{r}
+#| code-fold: true
+#| warning: false
+
+ggplot(data = mc3_edges, aes(x = type, fill = type)) +
+  geom_bar()
+
+```
+
+### Exploring nodes table
+
+Similarly, we explore the created nodes table. The report above reveals that there are 21515 missing values under "revenue_omu" column and these rows will be subsequently removed when visualising the revenues of the companies. The bar graph comparing the types of entities in the nodes table reveal that there are 3 types of entities - company, company contacts and owners.
+
+```{r}
+#| code-fold: true
+#| warning: false
+
+skim(mc3_nodes)
+```
+
+```{r}
+#| code-fold: true
+#| warning: false
+
+ggplot(data = mc3_nodes, aes(x = type, fill = type)) +
+  geom_bar()
+
+
+```
+
+### Data Wrangling
+
+We would need to extract the lists of entities found under the "Source" column in the edges table, and itemise them in separate rows. This is done by splitting the string in the lists into a new edges table, after removing whitespaces and irrelevant characters.
+
+```{r}
+#| code-fold: true
+#| warning: false
+
+# Break up the lists in the edge file by splitting the string
+mc3_edge_broken <- unnest(mc3_edges, source = strsplit(as.character(source), "\\(|\\,|\\)"))
+```
+
+```{r}
+#| code-fold: true
+#| warning: false
+
+# Remove whitespaces amd filter records with "c" value 
+mc3_edge_broken <- mc3_edge_broken %>%
+  mutate(source = gsub("\"", "", source)) %>%
+  filter(source !="c") %>%
+  mutate(source = trimws(source)) %>%
+  mutate(target = trimws(target)) %>%
+  group_by(source, target, type) %>%
+  summarise(weights = n()) %>%
+  filter(source != target) %>%
+  ungroup()
+
+```
+
+Next we will join the edges table with nodes table into combined edge table by mapping edge "source" column in edge table with "id" column in nodes table. This will provide us with the information on the type of "source" entities in the edges table. The edges table will be used to derive the data for subsequent visualisation.
+
+```{r}
+#| code-fold: true
+#| warning: false
+mc3_edges_bysource <- left_join(mc3_edge_broken, mc3_nodes,
+                               by = c("source" = "id"))
+  
+```
+
+```{r}
+#| code-fold: true
+#| warning: false
+
+#Rename relevant columns as "source type" and "target type"
+#Filter combined edge table by removing unknown and NA values from relevant columns.
+mc3_edges_bysource1 <- mc3_edges_bysource %>%
+  group_by(source, target, type.y, type.x, country, weights, revenue_omu, product_services) %>%
+  filter(source!=target) %>%
+  rename(source_type = type.y) %>%
+  rename(target_type = type.x) %>%
+  #filter(revenue_omu != "NA") %>%
+  filter(product_services != "Unknown") %>%
+  filter(product_services != "character(0)") %>%
+  ungroup()
+```
+
+# Visualisation
+
+### Countries registered by top revenue companies
+
+The treemap is constructed based on the top 50 companies that generates the highest revenues. It is observed that, of the top 50 companies with the highest revenues, almost half of the total revenues are earned by companies registered in ZH country. The 2 highest earning companies are Jones LLC and Patton Ltd. The diagram also revealed that Assam Limited Liability Company and Aqua Advancements Sashimi SE Express are the highest earning company in Utoporiana country and Oceanus country respectively.
+
+```{r}
+#| code-fold: true
+#| warning: false
+
+#Derive new edge table
+mc3_edges_toprevenue <- mc3_edges_bysource1 %>%
+  select (source, source_type, country, weights, revenue_omu, product_services) %>%
+  group_by(source) %>%
+  arrange(desc(revenue_omu)) %>%
+  distinct() %>%
+  ungroup()
+```
+
+```{r}
+#| code-fold: true
+#| warning: false
+
+#Filter top 50 companies with highest revenues
+mc3_edges_toprevenue_filtered <- mc3_edges_toprevenue %>%
+  filter (source_type == "Company") %>%
+  slice_max(order_by = revenue_omu, n = 50)
+```
+
+```{r}
+#| code-fold: true
+#| warning: false
+
+#Construct treemap
+treemap(mc3_edges_toprevenue_filtered,
+        index=c("country", "source"),
+        vSize="revenue_omu",
+        vColor="revenue_omu",
+        title="Revenue by Country and Company",
+        title.legend = "revenue of company"
+        )
+```
+
+### Individual owners with multiple companies
+
+One of the anormalies that we can detect is the number of companies the individual entities own. We can be suspicious of these individuals if they own an exceptionally high number of companies.
+
+In this visualisation, we can observe that there are seven individuals (Richard Smith, Jennifer Smith, James Smith, Jennifer Taylor, Micheal Williams, John Williams, Ashley Harris) who own the largest number of companies (total of 8 companies each). We can also infer that there are two big families among the above list - the Smith family and Williams family. In addition, we can detect that Michael Williams and David Jones co-own Garcia, as well as Ashley Harris and Amy Martinez co-own Davis.
+
+```{r}
+#| code-fold: true
+#| warning: false
+
+#Filter individual owners from edge table, and assign target to be source and vice versa
+mc3_edges_indivowners <- mc3_edges_bysource %>%
+  select (target, source, type.x, weights) %>%
+  group_by(target) %>%
+  filter(type.x == "Beneficial Owner") %>%
+  rename (sc = target) %>%
+  rename (tg = source) %>%
+  distinct() %>%
+  ungroup()
+```
+
+```{r}
+#| code-fold: true
+#| warning: false
+
+#Filter individuals who own more 5 companies
+mc3_edges_indivowners_filtered <- subset(mc3_edges_indivowners, ave(sc, sc, FUN = length) > 5)
+
+```
+
+```{r}
+#| code-fold: true
+#| warning: false
+
+#Create corresponding nodes table out of the edges table
+id1_inv <- mc3_edges_indivowners_filtered %>%
+  select(sc) %>%
+  rename(id = sc)
+id2_inv <- mc3_edges_indivowners_filtered %>%
+  select(tg) %>%
+  rename(id = tg)
+mc3_nodes_indivowners_filtered <- rbind(id1_inv, id2_inv) %>%
+  distinct()
+```
+
+```{r}
+#| code-fold: true
+#| warning: false
+
+#prep format for plotting
+mc3_edges_indivowners_filtered <- mc3_edges_indivowners_filtered %>%
+rename(from = sc) %>%
+rename(to = tg) %>%
+#filter (target_type == "companies") %>%
+filter(from!=to) %>%
+ungroup()
+  
+```
+
+```{r}
+#| code-fold: true
+#| warning: false
+
+#Plot interactive graph
+visNetwork(mc3_nodes_indivowners_filtered, mc3_edges_indivowners_filtered) %>%
+  visNodes(color = list(background = "pink", border = "red")) %>%
+  visEdges(arrows = "to") %>%
+  visIgraphLayout(layout = "layout_with_gem") %>%
+  visOptions(highlightNearest = TRUE, nodesIdSelection = TRUE) %>%
+  visLegend() %>%
+  visLayout(randomSeed = 123)
+
+```
+
+### Companies that have registered in multiple countries
+
+While it is true that companies are typically registered in the country where they are headquartered or where they conduct their primary operations, it is not unheard of for companies to be registered in multiple countries. Nevertheless for our visualisation, we wish to identify such companies as such situations may not be entirely normal and these companies may potentially breach some form of legality.
+
+The bar chart below shows the companies that have registered in more than one country. It reveals that Aqua Aura SE marine Life has the highest number of countries it registers in (8 countries in total). This is followed by Transit Limited Liability Company as well as Tamil Nadu S A/S, with both registered in 4 countries each.
+
+```{r}
+#| code-fold: true
+#| warning: false
+
+#Derive specific edge table and filter all companies
+mc3_edges_country <- mc3_edges_bysource %>%
+  select (source, country, type.y) %>%
+  group_by(source) %>%
+  filter(type.y == "Company") %>%
+  distinct() %>%
+  ungroup()
+```
+
+```{r}
+#| code-fold: true
+#| warning: false
+
+#Filter companies that are registered in more than 1 country
+mc3_edges_country_filtered_one <- subset(mc3_edges_country, ave(source, source, FUN = length) > 1)
+
+```
+
+```{r}
+#| code-fold: true
+
+ggplot(data = mc3_edges_country_filtered_one, aes(x = source)) +
+  geom_bar(fill = "lightblue") +
+  coord_flip() +
+  xlab("Companies") +
+  ylab("No of countries registered") +
+  scale_y_continuous(breaks = pretty_breaks(n = 5)) +
+  theme(axis.text.y = element_text(size = 4))
+```
+
+To gather deeper insights, we will drill down to more extreme cases to uncover deeper insights on such companies. The visualisation below focuses on companies which are registered in more than 2 countries. From the network plot, we can pick up the countries that the company registers in. In the case of Aqua Aura SE Marine Life, this company has registered in 8 countries - Oceanus, Coralmarica, Alverossia, Nalakond, Rio Isla, Talandria, Icarnia and Isliandor.
+
+```{r}
+#| code-fold: true
+#| warning: false
+
+#Filter companies that are registered in more than 2 countries
+mc3_edges_country_filtered <- subset(mc3_edges_country, ave(source, source, FUN = length) > 2)
+
+```
+
+```{r}
+#| code-fold: true
+#| warning: false
+
+#Create corresponding nodes table out of the edges table
+id1_con <- mc3_edges_country_filtered %>%
+  select(source) %>%
+  rename(id = source)
+id2_con <- mc3_edges_country_filtered %>%
+  select(country) %>%
+  rename(id = country)
+mc3_nodes_country_filtered <- rbind(id1_con, id2_con) %>%
+  distinct()
+```
+
+```{r}
+#| code-fold: true
+#| warning: false
+
+#prep format for plotting
+mc3_edges_country_filtered <- mc3_edges_country_filtered %>%
+rename(from = source) %>%
+rename(to = country) %>%
+filter(from!=to) %>%
+ungroup()
+  
+```
+
+```{r}
+#| code-fold: true
+#| warning: false
+
+#Plot interactive graph
+visNetwork(mc3_nodes_country_filtered, mc3_edges_country_filtered) %>%
+  visNodes(color = list(background = "lightgreen", border = "orange")) %>%
+  visEdges(arrows = "from") %>%
+  visIgraphLayout(layout = "layout_with_gem") %>%
+  visOptions(highlightNearest = TRUE, nodesIdSelection = TRUE) %>%
+  visLegend() %>%
+  visLayout(randomSeed = 123)
+
+```
+
+### Word cloud on product services
+
+The word cloud provides an overview of the range of product services provided by the companies. It also provides us with an indication of the more common business groups and the product mix.
+
+```{r}
+#| code-fold: true
+#| warning: false
+
+column_values <- mc3_edges_toprevenue$product_services
+```
+
+```{r}
+#| code-fold: true
+#| warning: false
+
+#Create a Corpus
+corpus <- Corpus(VectorSource(column_values))
+
+#Preprocess the words
+corpus <- tm_map(corpus, content_transformer(tolower))
+corpus <- tm_map(corpus, removePunctuation)
+corpus <- tm_map(corpus, removeNumbers)
+
+#Add custom stopwords
+custom_stopwords <- c("products", "systems", "including", "solutions", "industrial", "wide", "short", "fat", "die", "related", "equipment", "range", "offers", "kits", "frozen", "wild", "kit", "soft", "hard", "non", "cooked", "ltl", "dust", "full", "processing", "high", "dried", "far", "low", "roll", "flat", "raw", "source", "lcl", "men", "strip", "include", "multi", "natural", "general", "unit", "care", "hot", "rare", "dry", "set", "provides", "involved", "ends", "chum", "freelance", "hvac", "etc")
+corpus <- tm_map(corpus, removeWords, stopwords("english"))
+corpus <- tm_map(corpus, removeWords, custom_stopwords)
+
+#Create a term document matrix
+tdm <- TermDocumentMatrix(corpus)
+
+#Convert the term document matrix to a matrix
+m <- as.matrix(tdm)
+
+#Calculate word frequencies
+word_freq <- sort(rowSums(m), decreasing = TRUE)
+
+#Create the word cloud
+wordcloud(words = names(word_freq), freq = word_freq, scale = c(5, 1), random.order = FALSE, colors = brewer.pal(8, "Dark2"))
+
+```
+

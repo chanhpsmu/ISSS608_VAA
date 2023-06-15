@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.475">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Hin Phung">
+<meta name="dcterms.date" content="2023-06-09">
+
+<title>ISSS608_VAA - Take-Home Exercise 3</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script src="../../site_libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<link href="../../site_libs/vis-9.1.0/vis-network.min.css" rel="stylesheet">
+<script src="../../site_libs/vis-9.1.0/vis-network.min.js"></script>
+<script src="../../site_libs/visNetwork-binding-2.1.2/visNetwork.js"></script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">ISSS608_VAA</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-hands-on-exercise" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Hands-on Exercise</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-hands-on-exercise">    
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html">
+ <span class="dropdown-text">Hands-on Exercise 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex02/Hands-on_Ex02.html">
+ <span class="dropdown-text">Hands-on Exercise 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex03/Hands-on_Ex03.html">
+ <span class="dropdown-text">Hands-on Exercise 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04.html">
+ <span class="dropdown-text">Hands-on Exercise 4</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html">
+ <span class="dropdown-text">Hands-on Exercise 5</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex08/Hands-on_Ex08.html">
+ <span class="dropdown-text">Hands-on Exercise 8</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-in-class-exercise" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">In-class Exercise</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-in-class-exercise">    
+        <li>
+    <a class="dropdown-item" href="../../In-class_Ex/In-class_Ex01/In-class_Ex01.html">
+ <span class="dropdown-text">In-class Exercise 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../In-class_Ex/In-class_Ex03/In-class_Ex03.html">
+ <span class="dropdown-text">In-class Exercise 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../In-class_Ex/In-class_Ex04/In-class_Ex04.html">
+ <span class="dropdown-text">In-class Exercise 4</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../In-class_Ex/In-class_Ex05/In-class_Ex05.html">
+ <span class="dropdown-text">In-class Exercise 5</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../In-class_Ex/In-class_Ex06/In-class_Ex06.html">
+ <span class="dropdown-text">In-class Exercise 6</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-take-home-exercise" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Take-home Exercise</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-take-home-exercise">    
+        <li>
+    <a class="dropdown-item" href="../../Take-home_Ex/Take-home_Ex01/Take_home_Ex01.html">
+ <span class="dropdown-text">Take-home Exercise 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Take-home_Ex/Take-home_Ex03/Take-home_Ex03.html">
+ <span class="dropdown-text">Take-home Exercise 3</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">
+ <span class="menu-text">About</span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a>
+  <ul class="collapse">
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#methodology" id="toc-methodology" class="nav-link" data-scroll-target="#methodology">Methodology</a></li>
+  <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link" data-scroll-target="#data-preparation">Data Preparation</a></li>
+  </ul></li>
+  <li><a href="#the-data" id="toc-the-data" class="nav-link" data-scroll-target="#the-data">The Data</a></li>
+  <li><a href="#data-preparation-1" id="toc-data-preparation-1" class="nav-link" data-scroll-target="#data-preparation-1">Data Preparation</a></li>
+  <li><a href="#data-exploration" id="toc-data-exploration" class="nav-link" data-scroll-target="#data-exploration">Data Exploration</a>
+  <ul class="collapse">
+  <li><a href="#exploring-edge-table" id="toc-exploring-edge-table" class="nav-link" data-scroll-target="#exploring-edge-table">Exploring edge table</a></li>
+  <li><a href="#exploring-nodes-table" id="toc-exploring-nodes-table" class="nav-link" data-scroll-target="#exploring-nodes-table">Exploring nodes table</a></li>
+  <li><a href="#data-wrangling" id="toc-data-wrangling" class="nav-link" data-scroll-target="#data-wrangling">Data Wrangling</a></li>
+  </ul></li>
+  <li><a href="#visualisation" id="toc-visualisation" class="nav-link" data-scroll-target="#visualisation">Visualisation</a>
+  <ul class="collapse">
+  <li><a href="#countries-registered-by-top-revenue-companies" id="toc-countries-registered-by-top-revenue-companies" class="nav-link" data-scroll-target="#countries-registered-by-top-revenue-companies">Countries registered by top revenue companies</a></li>
+  <li><a href="#individual-owners-with-multiple-companies" id="toc-individual-owners-with-multiple-companies" class="nav-link" data-scroll-target="#individual-owners-with-multiple-companies">Individual owners with multiple companies</a></li>
+  <li><a href="#companies-that-have-registered-in-multiple-countries" id="toc-companies-that-have-registered-in-multiple-countries" class="nav-link" data-scroll-target="#companies-that-have-registered-in-multiple-countries">Companies that have registered in multiple countries</a></li>
+  <li><a href="#word-cloud-on-product-services" id="toc-word-cloud-on-product-services" class="nav-link" data-scroll-target="#word-cloud-on-product-services">Word cloud on product services</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Take-Home Exercise 3</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Hin Phung </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">June 9, 2023</p>
+    </div>
+  </div>
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">June 16, 2023</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<section id="overview" class="level1">
+<h1>Overview</h1>
+<section id="introduction" class="level3">
+<h3 class="anchored" data-anchor-id="introduction">Introduction</h3>
+<p>The country of Oceanus has sought FishEye International’s help in identifying companies possibly engaged in illegal, unreported, and unregulated (IUU) fishing. FishEye’s analysts had received import/export data for Oceanus’ marine and fishing industries, but the data is incomplete. FishEye had subsequently transformed the trade data into a knowledge graph to help them understand the business relationships, including finding links that will stop IUU fishing and protect marine species.</p>
+<p>We will address Question 1 of VAST challenge 2023 MC3 - To Use visual analytics to identify anomalies in the business groups present in the knowledge graph</p>
+</section>
+<section id="methodology" class="level3">
+<h3 class="anchored" data-anchor-id="methodology">Methodology</h3>
+<p>To use different visualisation techniques to identify relationships and anomalies of entities in the businesss groups.</p>
+</section>
+<section id="data-preparation" class="level3">
+<h3 class="anchored" data-anchor-id="data-preparation">Data Preparation</h3>
+<section id="installing-and-loading-of-r-packages" class="level4">
+<h4 class="anchored" data-anchor-id="installing-and-loading-of-r-packages">Installing and loading of R packages</h4>
+<p>The code chunk below will be used to install and load the necessary R packages as follows:</p>
+<ul>
+<li><p>jsonlite: a package supports both reading and writing JSON files, as well as working with JSON data retrieved from web APIs.</p></li>
+<li><p>igraph: a package in R that offers a wide range of tools for creating, manipulating, and visualizing graphs, as well as various algorithms and metrics for network analysis.</p></li>
+<li><p>tidygraph: provides a tidy and consistent approach to working with graph data using the principles of the tidyverse</p></li>
+<li><p>ggraph: an extension package in R that builds upon the tidygraph and ggplot2 packages. It provides a high-level interface for creating visualizations of graph data using the grammar of graphics approach.</p></li>
+<li><p>viznetwork: a package provides geoms for ggplot2 to repel overlapping text labels.</p></li>
+<li><p>graphlayouts: a package that provides a collection of layout algorithms that can be used to visualize graphs.</p></li>
+<li><p>ggforce: extension package for ggplot2 that provides additional functionalities and extensions to enhance and expand the capabilities of ggplot2 for data visualization.</p></li>
+<li><p>tidyverse: a family of modern R packages specially designed to support data science, analysis and communication task including creating static statistical graphs.</p></li>
+<li><p>scales: package that provides various functions for scaling and formatting data, primarily for data visualization purposes.</p></li>
+<li><p>wordcloud: package for creating word clouds, which are visual representations of textual data where the size of each word corresponds to its frequency or importance in the text.</p></li>
+<li><p>tm: text mining package that provides tools for text preprocessing, document-term matrix creation, and various other text mining tasks.</p></li>
+<li><p>treemap: a package that allows you to create treemaps, which are visualizations that display hierarchical data as nested rectangles.</p></li>
+</ul>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(jsonlite, tidygraph, ggraph, </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>               visNetwork, graphlayouts, ggforce, </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>               skimr, tidytext, tidyverse, scales, wordcloud, tm, treemap)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+</section>
+</section>
+<section id="the-data" class="level1">
+<h1>The Data</h1>
+<p>The function fromJSON() of jsonlite package is used to import mc3.json into R environment. The data comprises:</p>
+<ul>
+<li><p>list of 27622 “nodes” with 5 columns (id, country, type, revenue_omu, project_services)</p></li>
+<li><p>list of 24038 “links” with 3 columns (source, target, type)</p></li>
+</ul>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mc3_data <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(<span class="st">"data/MC3.json"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="data-preparation-1" class="level1">
+<h1>Data Preparation</h1>
+<p>The list of “links” are extracted to form an edge table. Correspondingly, the list of “nodes” are extracted to form a nodes table.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Extract edges from the list</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>mc3_edges <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(mc3_data<span class="sc">$</span>links) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">source =</span> <span class="fu">as.character</span>(source),</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">target =</span> <span class="fu">as.character</span>(target),</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">type =</span> <span class="fu">as.character</span>(type)) <span class="sc">%&gt;%</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(source, target, type) <span class="sc">%&gt;%</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">weights =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(source<span class="sc">!=</span>target) <span class="sc">%&gt;%</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Extract nodes from the list</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>mc3_nodes <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(mc3_data<span class="sc">$</span>nodes) <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">country =</span> <span class="fu">as.character</span>(country),</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">id =</span> <span class="fu">as.character</span>(id),</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">product_services =</span> <span class="fu">as.character</span>(product_services),</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">revenue_omu =</span> <span class="fu">as.numeric</span>(<span class="fu">as.character</span>(revenue_omu)),</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">type =</span> <span class="fu">as.character</span>(type)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(id, country, type, revenue_omu, product_services)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="data-exploration" class="level1">
+<h1>Data Exploration</h1>
+<section id="exploring-edge-table" class="level3">
+<h3 class="anchored" data-anchor-id="exploring-edge-table">Exploring edge table</h3>
+<p>We first explore the created edge table. The report below reveals that there are not missing values in all fields.We also made comparison between Different types in the edge table. The bar graph below indicates that there are 2 types of entities in the edge table - company contacts and owners.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(mc3_edges)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">mc3_edges</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Number of rows</td>
+<td style="text-align: left;">24036</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Number of columns</td>
+<td style="text-align: left;">4</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">_______________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Column type frequency:</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">character</td>
+<td style="text-align: left;">3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">________________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Group variables</td>
+<td style="text-align: left;">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 13%">
+<col style="width: 19%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 8%">
+<col style="width: 12%">
+<col style="width: 15%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">min</th>
+<th style="text-align: right;">max</th>
+<th style="text-align: right;">empty</th>
+<th style="text-align: right;">n_unique</th>
+<th style="text-align: right;">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">source</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">700</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">12856</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">target</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">21265</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">type</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 13%">
+<col style="width: 19%">
+<col style="width: 6%">
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 6%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">p0</th>
+<th style="text-align: right;">p25</th>
+<th style="text-align: right;">p50</th>
+<th style="text-align: right;">p75</th>
+<th style="text-align: right;">p100</th>
+<th style="text-align: left;">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">weights</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">▁▁▇▁▁</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mc3_edges, <span class="fu">aes</span>(<span class="at">x =</span> type, <span class="at">fill =</span> type)) <span class="sc">+</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="Take-home_Ex03_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="exploring-nodes-table" class="level3">
+<h3 class="anchored" data-anchor-id="exploring-nodes-table">Exploring nodes table</h3>
+<p>Similarly, we explore the created nodes table. The report above reveals that there are 21515 missing values under “revenue_omu” column and these rows will be subsequently removed when visualising the revenues of the companies. The bar graph comparing the types of entities in the nodes table reveal that there are 3 types of entities - company, company contacts and owners.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(mc3_nodes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">mc3_nodes</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Number of rows</td>
+<td style="text-align: left;">27622</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Number of columns</td>
+<td style="text-align: left;">5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">_______________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Column type frequency:</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">character</td>
+<td style="text-align: left;">4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">________________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Group variables</td>
+<td style="text-align: left;">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 22%">
+<col style="width: 13%">
+<col style="width: 18%">
+<col style="width: 5%">
+<col style="width: 6%">
+<col style="width: 7%">
+<col style="width: 11%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">min</th>
+<th style="text-align: right;">max</th>
+<th style="text-align: right;">empty</th>
+<th style="text-align: right;">n_unique</th>
+<th style="text-align: right;">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">id</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">22929</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">country</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">type</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">product_services</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">1737</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">3244</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 9%">
+<col style="width: 13%">
+<col style="width: 7%">
+<col style="width: 8%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 9%">
+<col style="width: 5%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">p0</th>
+<th style="text-align: right;">p25</th>
+<th style="text-align: right;">p50</th>
+<th style="text-align: right;">p75</th>
+<th style="text-align: right;">p100</th>
+<th style="text-align: left;">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">revenue_omu</td>
+<td style="text-align: right;">21515</td>
+<td style="text-align: right;">0.22</td>
+<td style="text-align: right;">1822155</td>
+<td style="text-align: right;">18184433</td>
+<td style="text-align: right;">3652.23</td>
+<td style="text-align: right;">7676.36</td>
+<td style="text-align: right;">16210.68</td>
+<td style="text-align: right;">48327.66</td>
+<td style="text-align: right;">310612303</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mc3_nodes, <span class="fu">aes</span>(<span class="at">x =</span> type, <span class="at">fill =</span> type)) <span class="sc">+</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="Take-home_Ex03_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="data-wrangling" class="level3">
+<h3 class="anchored" data-anchor-id="data-wrangling">Data Wrangling</h3>
+<p>We would need to extract the lists of entities found under the “Source” column in the edges table, and itemise them in separate rows. This is done by splitting the string in the lists into a new edges table, after removing whitespaces and irrelevant characters.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Break up the lists in the edge file by splitting the string</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>mc3_edge_broken <span class="ot">&lt;-</span> <span class="fu">unnest</span>(mc3_edges, <span class="at">source =</span> <span class="fu">strsplit</span>(<span class="fu">as.character</span>(source), <span class="st">"</span><span class="sc">\\</span><span class="st">(|</span><span class="sc">\\</span><span class="st">,|</span><span class="sc">\\</span><span class="st">)"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove whitespaces amd filter records with "c" value </span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>mc3_edge_broken <span class="ot">&lt;-</span> mc3_edge_broken <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">source =</span> <span class="fu">gsub</span>(<span class="st">"</span><span class="sc">\"</span><span class="st">"</span>, <span class="st">""</span>, source)) <span class="sc">%&gt;%</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(source <span class="sc">!=</span><span class="st">"c"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">source =</span> <span class="fu">trimws</span>(source)) <span class="sc">%&gt;%</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">target =</span> <span class="fu">trimws</span>(target)) <span class="sc">%&gt;%</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(source, target, type) <span class="sc">%&gt;%</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">weights =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(source <span class="sc">!=</span> target) <span class="sc">%&gt;%</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Next we will join the edges table with nodes table into combined edge table by mapping edge “source” column in edge table with “id” column in nodes table. This will provide us with the information on the type of “source” entities in the edges table. The edges table will be used to derive the data for subsequent visualisation.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>mc3_edges_bysource <span class="ot">&lt;-</span> <span class="fu">left_join</span>(mc3_edge_broken, mc3_nodes,</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                               <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"source"</span> <span class="ot">=</span> <span class="st">"id"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Rename relevant columns as "source type" and "target type"</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Filter combined edge table by removing unknown and NA values from relevant columns.</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>mc3_edges_bysource1 <span class="ot">&lt;-</span> mc3_edges_bysource <span class="sc">%&gt;%</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(source, target, type.y, type.x, country, weights, revenue_omu, product_services) <span class="sc">%&gt;%</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(source<span class="sc">!=</span>target) <span class="sc">%&gt;%</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">source_type =</span> type.y) <span class="sc">%&gt;%</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">target_type =</span> type.x) <span class="sc">%&gt;%</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">#filter(revenue_omu != "NA") %&gt;%</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(product_services <span class="sc">!=</span> <span class="st">"Unknown"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(product_services <span class="sc">!=</span> <span class="st">"character(0)"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+</section>
+<section id="visualisation" class="level1">
+<h1>Visualisation</h1>
+<section id="countries-registered-by-top-revenue-companies" class="level3">
+<h3 class="anchored" data-anchor-id="countries-registered-by-top-revenue-companies">Countries registered by top revenue companies</h3>
+<p>The treemap is constructed based on the top 50 companies that generates the highest revenues. It is observed that, of the top 50 companies with the highest revenues, almost half of the total revenues are earned by companies registered in ZH country. The 2 highest earning companies are Jones LLC and Patton Ltd.&nbsp;The diagram also revealed that Assam Limited Liability Company and Aqua Advancements Sashimi SE Express are the highest earning company in Utoporiana country and Oceanus country respectively.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Derive new edge table</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>mc3_edges_toprevenue <span class="ot">&lt;-</span> mc3_edges_bysource1 <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span> (source, source_type, country, weights, revenue_omu, product_services) <span class="sc">%&gt;%</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(source) <span class="sc">%&gt;%</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(revenue_omu)) <span class="sc">%&gt;%</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Filter top 50 companies with highest revenues</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>mc3_edges_toprevenue_filtered <span class="ot">&lt;-</span> mc3_edges_toprevenue <span class="sc">%&gt;%</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span> (source_type <span class="sc">==</span> <span class="st">"Company"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(<span class="at">order_by =</span> revenue_omu, <span class="at">n =</span> <span class="dv">50</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Construct treemap</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">treemap</span>(mc3_edges_toprevenue_filtered,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">index=</span><span class="fu">c</span>(<span class="st">"country"</span>, <span class="st">"source"</span>),</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">vSize=</span><span class="st">"revenue_omu"</span>,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">vColor=</span><span class="st">"revenue_omu"</span>,</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">title=</span><span class="st">"Revenue by Country and Company"</span>,</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">title.legend =</span> <span class="st">"revenue of company"</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>        )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="Take-home_Ex03_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="individual-owners-with-multiple-companies" class="level3">
+<h3 class="anchored" data-anchor-id="individual-owners-with-multiple-companies">Individual owners with multiple companies</h3>
+<p>One of the anormalies that we can detect is the number of companies the individual entities own. We can be suspicious of these individuals if they own an exceptionally high number of companies.</p>
+<p>In this visualisation, we can observe that there are seven individuals (Richard Smith, Jennifer Smith, James Smith, Jennifer Taylor, Micheal Williams, John Williams, Ashley Harris) who own the largest number of companies (total of 8 companies each). We can also infer that there are two big families among the above list - the Smith family and Williams family. In addition, we can detect that Michael Williams and David Jones co-own Garcia, as well as Ashley Harris and Amy Martinez co-own Davis.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Filter individual owners from edge table, and assign target to be source and vice versa</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>mc3_edges_indivowners <span class="ot">&lt;-</span> mc3_edges_bysource <span class="sc">%&gt;%</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span> (target, source, type.x, weights) <span class="sc">%&gt;%</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(target) <span class="sc">%&gt;%</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(type.x <span class="sc">==</span> <span class="st">"Beneficial Owner"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span> (<span class="at">sc =</span> target) <span class="sc">%&gt;%</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span> (<span class="at">tg =</span> source) <span class="sc">%&gt;%</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Filter individuals who own more 5 companies</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>mc3_edges_indivowners_filtered <span class="ot">&lt;-</span> <span class="fu">subset</span>(mc3_edges_indivowners, <span class="fu">ave</span>(sc, sc, <span class="at">FUN =</span> length) <span class="sc">&gt;</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Create corresponding nodes table out of the edges table</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>id1_inv <span class="ot">&lt;-</span> mc3_edges_indivowners_filtered <span class="sc">%&gt;%</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(sc) <span class="sc">%&gt;%</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">id =</span> sc)</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>id2_inv <span class="ot">&lt;-</span> mc3_edges_indivowners_filtered <span class="sc">%&gt;%</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(tg) <span class="sc">%&gt;%</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">id =</span> tg)</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>mc3_nodes_indivowners_filtered <span class="ot">&lt;-</span> <span class="fu">rbind</span>(id1_inv, id2_inv) <span class="sc">%&gt;%</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#prep format for plotting</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>mc3_edges_indivowners_filtered <span class="ot">&lt;-</span> mc3_edges_indivowners_filtered <span class="sc">%&gt;%</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rename</span>(<span class="at">from =</span> sc) <span class="sc">%&gt;%</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rename</span>(<span class="at">to =</span> tg) <span class="sc">%&gt;%</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co">#filter (target_type == "companies") %&gt;%</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(from<span class="sc">!=</span>to) <span class="sc">%&gt;%</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Plot interactive graph</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">visNetwork</span>(mc3_nodes_indivowners_filtered, mc3_edges_indivowners_filtered) <span class="sc">%&gt;%</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">visNodes</span>(<span class="at">color =</span> <span class="fu">list</span>(<span class="at">background =</span> <span class="st">"pink"</span>, <span class="at">border =</span> <span class="st">"red"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">visEdges</span>(<span class="at">arrows =</span> <span class="st">"to"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">visIgraphLayout</span>(<span class="at">layout =</span> <span class="st">"layout_with_gem"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">visOptions</span>(<span class="at">highlightNearest =</span> <span class="cn">TRUE</span>, <span class="at">nodesIdSelection =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">visLegend</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">visLayout</span>(<span class="at">randomSeed =</span> <span class="dv">123</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="visNetwork html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-1e0fbe4a598817415ae2" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-1e0fbe4a598817415ae2">{"x":{"nodes":{"id":["Richard Smith","David Jones","Michael Miller","David Thomas","Mark Miller","Anna Wheeler","Michael Bell","Joshua Smith","Joshua Martin","John Gonzalez","Ashley Harris","Michael Williams","Amy Williams","James Smith","Jennifer Smith","Amy Martinez","Jennifer Taylor","Michael Jackson","Christopher Jones","John Williams","Lisa Johnson","Acevedo","Adriatic Catch S.A. de C.V.","Alexander PLC","Alvarez","Andhra Pradesh  Limited Liability Company Ray","Andrews","Aqua Adventures Ltd. Corporation","Aqua Aura SE Marine life","Aqua Gourmet Incorporated Creek","Arnold","Ashley","Assam   Ltd. Liability Co","Baker","Baltic Sprat Ges.m.b.H. Enterprises","Barnett","Beach Bums Corporation Transit","BlueTide GmbH & Co. KG","Brewer Inc","Brisa del Mar GmbH","Brown and Alvarez","Brown-Evans","Byrd-Flores","Carter LLC","Chase","Chavez PLC","Choi and Merritt","Christensen and Bender","Collins and Johnson","Congo Rapids   AG Sea spray","Cortez Group","Costa de Coral Kga","Davis","Dean-Fisher","Deep Sea Divers BV Logistics","Dickson and Gonzalez","Dnipro  Saltwater N.V. Services","Dutch Mussels S.p.A. Sea spray","Ferguson and Miller","Finley and Mcdaniel","Fowler-Davis","Garcia","Garcia and Acevedo","Garcia and Harris","Graham Inc","Group S.A. de C.V.","Hall-Taylor","Hamilton LLC","Hernandez","Hernandez and Wade","Herring","Horton and Lewis","Jacobs-Henry","Johnson","Johnson and Wright","Karelians Plc Marine conservation","Kariba Dam   CJSC Marine sanctuary","Khundu N.V. and Son's","Kidd and Hall","Kline and Roberts","Kong zhong diao yu  GmbH","Lang","Lara","Limpopo River  Ltd. Liability Co","Lloyd-Russell","Ltd. Corporation Ltd. Corporation","Luangwa River   Limited Liability Company Holdings","Lucas-Shelton","Maacama  S.p.A. Marine ecology","Malawi Rift   S.A. de C.V. Express","Malone and Willis","Mar de Coral GmbH and Son's","Mar de Cristal Ltd Abalone","Mar de Cristal S.A. de C.V.","Mar de Cristal ОАО","Mar del Oeste -","Mar del Placer Plc","Marine Muse Pic Marine ecology","Martinez","Matthews and White","Meadows","Melanippe GmbH & Co. KG","Merritt-Austin","Montes","Murphy-Russell","Nagaland Sea Catch Ltd. Liability Co Logistics","Norwegian Fjord  S.A. de C.V. Brothers","Náutica del Mar GmbH & Co. KG","Ocean Quest S.A. de C.V.","Océano del Este Eel","Ola de la Costa AS","PacificPlates S.A. de C.V.","Phillips and Moody","Playa de Arena Ltd. Liability Co","Playa de la Luna Starfish","Portuguese Sea Bass & N.V. Logistics","Punjab  Market Ltd. Liability Co Brothers","Punjab s Pic Express","Reese","Reyes-Kelly","Rogers-Robinson","Romero Ltd and Son's","Rubio-Evans","Rufiji Delta  Limited Liability Company","Sanchez PLC","Sander Ltd. Liability Co Solutions","Sea Striders Kelp BV Solutions","SeaSelect Foods Salt spray","SeaSolutions Dry dock OJSC Transit","SeaSolutions Leska Kga Worldwide","Seashell Sanctum Co Family","Selkie GmbH Marine life","Shepherd and Phillips","SilverScales Ltd. Liability Co","Simon and Farmer","Singleton Ltd","Smith and Harrison","Smith and Scott","Spanish Shrimp A/S Marine","Sullivan","Taylor","Thetis Ltd. Liability Co","Thompson","TideTurner Tidepool Co Enterprises","Tucker-Turner","Turkish Calamari LLC Shipping","Turkish Calamari Plc ship","Uttar Pradesh Sea  Ges.m.b.H. Industrial","Uttar Pradesh Sea  United","Velazquez-Harris","Vespuci Sandbar Sp Brothers","Walker-Lozano","Webb and Martin","Werner-Ortiz","West Bengal  Co _","West Fish  GmbH Transport","Wise and Fuentes","Wright LLC","Young and Ramos","hǎi mǎ S.p.A. Transport","hǎi zhé S.A. de C.V.","jīn qiāng yú AG","mán yú BV Coral Reef"],"x":[0.0794695582203746,-0.256754269662919,-0.776403412538838,0.480941316361662,0.762390404427141,0.426632424293302,-0.695883377754365,-0.110257400383772,-0.590439936535922,-0.47423796841087,0.30073058935478,-0.308471034784238,0.0630811836747638,0.0201519937671577,-0.0410337178187021,0.715683063237717,-0.200052404914247,0.446163723124754,-0.213167459308793,0.0940976179524851,0.147243435004693,0.119438400267827,-0.44002643416139,-0.311374614281014,-1,0.63496581052286,0.940553268119074,0.576266867283961,-0.922012151653202,0.951476271908788,0.180908391051952,-0.195021031899479,-0.791616632234766,-0.532446136684572,0.650611707672463,-0.692419478120463,-0.239360711053741,0.65318620051918,-0.871897430759853,0.49429394660488,-0.760716366547768,-0.498233552688041,0.479956463603105,-0.514306378664469,0.134791377077853,0.0336012055568911,0.142932830883074,-0.186091995626149,-0.659725736861545,-0.41855929683738,-0.200611083053216,-0.501570095067772,0.587330581107911,-0.910030855386698,0.183446678592363,0.203917515709121,0.977650611718604,-0.192243576035414,-0.358964219746595,1,-0.977798467110938,-0.45110361346379,-0.635667875953986,-0.396217511421724,-0.0835957871000064,0.634091669776852,0.100603348288324,-0.127515943424707,-0.168501441036053,0.0864249815580067,-0.666118234029544,0.927616938376197,-0.057531507345118,-0.651931286581716,-0.734114501921291,0.218638483637689,-0.348271072011574,0.934685503069984,0.37887699349165,0.568541915444289,0.192518917186481,-0.222755770064959,0.470073612380026,-0.837841854178103,0.175208808931838,-0.911306469563882,0.0132072109303862,0.134012354247677,-0.156114047823156,0.964082668808215,-0.00340975428659351,-0.049768678756302,0.235639387400198,0.496094879802611,-0.192661817614916,-0.115180183572339,0.564769051857222,0.576903583953308,0.862561126101142,0.904615833896998,0.204715151195322,-0.273177119061049,0.643111013715179,0.435904066082535,-0.00656864764624177,0.592979577009822,0.975698973232966,0.633757910022769,0.670326274980767,-0.487439331854404,0.261050218822008,0.615119941157983,-0.117772476598103,-0.57674448260588,-0.30041762148231,0.0359021184207797,-0.934673266582275,-0.881020833258431,-0.150256060139268,-0.997713152041702,-0.37885548545748,0.0835046554954628,0.516932804116663,0.603035509762077,-0.442383965497691,-0.446027290332544,-0.3798637789149,-0.278524641350178,0.281703843334482,0.233071042057277,0.917702227594427,-0.774398402120125,-0.33765628276785,-0.0395028366255172,0.179941394378456,-0.387784323438916,-0.255142901301831,-0.481180008916425,0.147117115096684,0.283332994112837,0.0409177672753385,0.200369450189805,-0.344718698897872,0.236185000525064,-0.609584102231607,0.229219268718681,0.258138508697453,0.271381812486353,0.517918100168808,-0.525152378418922,-0.207730171070966,0.0523427903402487,0.504626927339943,-0.321780985603129,0.616847338973627,-0.973069746564291,0.0834204089448316,0.420962321661361,-0.975021525771215,0.0966215838994946,0.151381666376005,0.537617180468327,-0.0947856284797727],"y":[-0.212386725218138,-0.277213492405228,-0.118333864999207,-0.586420211316923,-0.00365298768386779,-0.156163563157717,0.289612341960578,-0.411054730466622,-0.574162728259815,0.60070333269272,0.230720159407718,-0.0346101905051973,0.55103838795084,0.169737047304359,0.0147642865228372,0.307505030705771,0.195126652748625,0.68663795924148,0.761528729009973,0.0181289815053569,-0.760303199985544,-0.38874334326767,-0.400844388985574,-0.478354184874367,-0.174084201555047,-0.770577864887219,-0.124167657337204,-0.287294926263197,0.31660234255684,-0.0347663618115063,-0.352923569605113,-0.639792129737585,-0.641538676449398,0.809409831696635,-0.180811207841974,-0.761956745174575,-0.594423699626694,-0.725572727761743,0.420826645328002,0.195648104464324,-0.724794247222446,-0.0873211989572237,0.360629028733109,0.0238609600391071,0.77462782033706,-0.392545289167511,0.321438074884071,-0.587673868748598,0.727001625624652,-0.45025144928297,0.0144276047828638,-0.134288352959721,0.334865893650597,0.374391154143,0.748386196142994,-0.405973742128128,-0.0776183051887521,-0.0586770424241095,-0.473975514089312,-0.0178892213536302,-0.131270240912658,-0.229432117064344,0.789910107839269,0.266272032594364,-0.643837953181828,0.796079693460673,0.364784712269902,0.13099067464011,0.972556245692985,0.786575973316779,0.678298680833192,0.30599721153982,0.339793026979326,-0.784836541604079,-0.763435052132104,-0.0338466562672477,0.936178046185224,0.355495166706467,0.417182364875578,0.89386821774161,-0.959837516977333,0.410467733861527,0.917846648955204,0.454022646008928,-1,0.262076487790142,-0.0994995993783411,-0.999278079323029,-0.107136853844303,0.0780466771919841,0.743526216545139,-0.14823715899847,-0.984475619010365,0.302221760422449,0.0814697153302952,-0.141396863673162,0.840701924615296,-0.808813553160654,0.464630062791632,0.433616371783141,0.707176542715516,0.407363383569142,-0.253907844796912,0.359927320574633,0.370009641686994,-0.754899058870769,0.0312787892480542,-0.128537295111046,-0.677234918580285,-0.0199228147609232,0.102850349879563,-0.21686529698088,-0.612888771556956,0.802835702463821,0.346194687750487,0.772059941520544,-0.241440953777977,0.344784608236425,-0.649110797611257,-0.0958576853503905,-0.413056801289037,-0.962744680523765,-0.792535230519226,-0.302327135644731,-0.143881449268267,-0.350573126382058,0.331380228523371,0.949844249371976,0.0289627916019388,-0.0937385267869733,0.392063811147257,-0.686460415291687,0.381544325343463,-0.610057084904866,-0.132154093629485,0.21981575066716,0.995933370465759,0.0693566621678998,0.261267570615249,-0.0390919235231638,0.382856930835894,0.146716704222963,0.292803207202305,-0.343383583463193,0.753976543277359,0.0485203219917036,-0.29727866958556,-0.947878221242487,0.901331350409483,-0.0408597740262399,1,0.315765075394554,0.252838549809567,0.97251260122944,0.84815866950485,-0.211395154607349,-0.419850353489948,0.405088866541599,-0.0522868889747974,0.730800487470089,-0.430910740598284,-0.331712940075458,0.299328498908259],"label":["Richard Smith","David Jones","Michael Miller","David Thomas","Mark Miller","Anna Wheeler","Michael Bell","Joshua Smith","Joshua Martin","John Gonzalez","Ashley Harris","Michael Williams","Amy Williams","James Smith","Jennifer Smith","Amy Martinez","Jennifer Taylor","Michael Jackson","Christopher Jones","John Williams","Lisa Johnson","Acevedo","Adriatic Catch S.A. de C.V.","Alexander PLC","Alvarez","Andhra Pradesh  Limited Liability Company Ray","Andrews","Aqua Adventures Ltd. Corporation","Aqua Aura SE Marine life","Aqua Gourmet Incorporated Creek","Arnold","Ashley","Assam   Ltd. Liability Co","Baker","Baltic Sprat Ges.m.b.H. Enterprises","Barnett","Beach Bums Corporation Transit","BlueTide GmbH & Co. KG","Brewer Inc","Brisa del Mar GmbH","Brown and Alvarez","Brown-Evans","Byrd-Flores","Carter LLC","Chase","Chavez PLC","Choi and Merritt","Christensen and Bender","Collins and Johnson","Congo Rapids   AG Sea spray","Cortez Group","Costa de Coral Kga","Davis","Dean-Fisher","Deep Sea Divers BV Logistics","Dickson and Gonzalez","Dnipro  Saltwater N.V. Services","Dutch Mussels S.p.A. Sea spray","Ferguson and Miller","Finley and Mcdaniel","Fowler-Davis","Garcia","Garcia and Acevedo","Garcia and Harris","Graham Inc","Group S.A. de C.V.","Hall-Taylor","Hamilton LLC","Hernandez","Hernandez and Wade","Herring","Horton and Lewis","Jacobs-Henry","Johnson","Johnson and Wright","Karelians Plc Marine conservation","Kariba Dam   CJSC Marine sanctuary","Khundu N.V. and Son's","Kidd and Hall","Kline and Roberts","Kong zhong diao yu  GmbH","Lang","Lara","Limpopo River  Ltd. Liability Co","Lloyd-Russell","Ltd. Corporation Ltd. Corporation","Luangwa River   Limited Liability Company Holdings","Lucas-Shelton","Maacama  S.p.A. Marine ecology","Malawi Rift   S.A. de C.V. Express","Malone and Willis","Mar de Coral GmbH and Son's","Mar de Cristal Ltd Abalone","Mar de Cristal S.A. de C.V.","Mar de Cristal ОАО","Mar del Oeste -","Mar del Placer Plc","Marine Muse Pic Marine ecology","Martinez","Matthews and White","Meadows","Melanippe GmbH & Co. KG","Merritt-Austin","Montes","Murphy-Russell","Nagaland Sea Catch Ltd. Liability Co Logistics","Norwegian Fjord  S.A. de C.V. Brothers","Náutica del Mar GmbH & Co. KG","Ocean Quest S.A. de C.V.","Océano del Este Eel","Ola de la Costa AS","PacificPlates S.A. de C.V.","Phillips and Moody","Playa de Arena Ltd. Liability Co","Playa de la Luna Starfish","Portuguese Sea Bass & N.V. Logistics","Punjab  Market Ltd. Liability Co Brothers","Punjab s Pic Express","Reese","Reyes-Kelly","Rogers-Robinson","Romero Ltd and Son's","Rubio-Evans","Rufiji Delta  Limited Liability Company","Sanchez PLC","Sander Ltd. Liability Co Solutions","Sea Striders Kelp BV Solutions","SeaSelect Foods Salt spray","SeaSolutions Dry dock OJSC Transit","SeaSolutions Leska Kga Worldwide","Seashell Sanctum Co Family","Selkie GmbH Marine life","Shepherd and Phillips","SilverScales Ltd. Liability Co","Simon and Farmer","Singleton Ltd","Smith and Harrison","Smith and Scott","Spanish Shrimp A/S Marine","Sullivan","Taylor","Thetis Ltd. Liability Co","Thompson","TideTurner Tidepool Co Enterprises","Tucker-Turner","Turkish Calamari LLC Shipping","Turkish Calamari Plc ship","Uttar Pradesh Sea  Ges.m.b.H. Industrial","Uttar Pradesh Sea  United","Velazquez-Harris","Vespuci Sandbar Sp Brothers","Walker-Lozano","Webb and Martin","Werner-Ortiz","West Bengal  Co _","West Fish  GmbH Transport","Wise and Fuentes","Wright LLC","Young and Ramos","hǎi mǎ S.p.A. Transport","hǎi zhé S.A. de C.V.","jīn qiāng yú AG","mán yú BV Coral Reef"]},"edges":{"from":["Richard Smith","David Jones","David Jones","Michael Miller","David Thomas","Mark Miller","Anna Wheeler","Michael Bell","Mark Miller","Richard Smith","Joshua Smith","Joshua Martin","John Gonzalez","Anna Wheeler","Joshua Martin","Joshua Smith","David Thomas","Michael Bell","Ashley Harris","Joshua Martin","Michael Williams","Ashley Harris","Michael Williams","Amy Williams","Richard Smith","James Smith","Joshua Smith","John Gonzalez","David Jones","Jennifer Smith","Michael Williams","Amy Martinez","Ashley Harris","Michael Bell","Amy Williams","Richard Smith","Mark Miller","Jennifer Smith","David Jones","Mark Miller","Michael Miller","David Jones","Michael Williams","John Gonzalez","Jennifer Taylor","Joshua Smith","Michael Jackson","James Smith","Jennifer Smith","Christopher Jones","Amy Williams","John Gonzalez","Amy Martinez","James Smith","Joshua Martin","Joshua Martin","John Williams","Christopher Jones","Amy Martinez","Ashley Harris","Michael Jackson","Lisa Johnson","Jennifer Taylor","Michael Jackson","Michael Bell","Lisa Johnson","Michael Bell","Jennifer Smith","Lisa Johnson","Jennifer Smith","Mark Miller","Amy Williams","Jennifer Smith","Lisa Johnson","Ashley Harris","Jennifer Smith","Jennifer Smith","Michael Jackson","David Thomas","Amy Martinez","Amy Martinez","Amy Williams","Jennifer Taylor","Anna Wheeler","Ashley Harris","James Smith","David Thomas","Mark Miller","Anna Wheeler","David Thomas","Michael Williams","John Williams","Anna Wheeler","Joshua Smith","John Gonzalez","Jennifer Taylor","Amy Williams","Michael Miller","Michael Bell","Joshua Smith","Michael Miller","David Jones","Lisa Johnson","David Thomas","Anna Wheeler","Michael Williams","David Jones","Jennifer Taylor","Christopher Jones","John Williams","John Williams","Amy Martinez","Joshua Martin","Jennifer Taylor","Joshua Smith","John Williams","Jennifer Taylor","Christopher Jones","Michael Williams","James Smith","John Williams","James Smith","John Williams","Jennifer Taylor","Richard Smith","John Gonzalez","John Williams","Richard Smith","Lisa Johnson","Michael Jackson","Michael Williams","Christopher Jones","James Smith","Ashley Harris","Christopher Jones","Michael Jackson","Michael Miller","Richard Smith","Ashley Harris","Michael Miller","Amy Williams","Richard Smith","Anna Wheeler","James Smith"],"to":["Acevedo","Adriatic Catch S.A. de C.V.","Alexander PLC","Alvarez","Andhra Pradesh  Limited Liability Company Ray","Andrews","Aqua Adventures Ltd. Corporation","Aqua Aura SE Marine life","Aqua Gourmet Incorporated Creek","Arnold","Ashley","Assam   Ltd. Liability Co","Baker","Baltic Sprat Ges.m.b.H. Enterprises","Barnett","Beach Bums Corporation Transit","BlueTide GmbH & Co. KG","Brewer Inc","Brisa del Mar GmbH","Brown and Alvarez","Brown-Evans","Byrd-Flores","Carter LLC","Chase","Chavez PLC","Choi and Merritt","Christensen and Bender","Collins and Johnson","Congo Rapids   AG Sea spray","Cortez Group","Costa de Coral Kga","Davis","Davis","Dean-Fisher","Deep Sea Divers BV Logistics","Dickson and Gonzalez","Dnipro  Saltwater N.V. Services","Dutch Mussels S.p.A. Sea spray","Ferguson and Miller","Finley and Mcdaniel","Fowler-Davis","Garcia","Garcia","Garcia and Acevedo","Garcia and Harris","Graham Inc","Group S.A. de C.V.","Hall-Taylor","Hamilton LLC","Hernandez","Hernandez and Wade","Herring","Horton and Lewis","Jacobs-Henry","Johnson","Johnson and Wright","Karelians Plc Marine conservation","Kariba Dam   CJSC Marine sanctuary","Khundu N.V. and Son's","Kidd and Hall","Kline and Roberts","Kong zhong diao yu  GmbH","Lang","Lara","Limpopo River  Ltd. Liability Co","Lloyd-Russell","Ltd. Corporation Ltd. Corporation","Luangwa River   Limited Liability Company Holdings","Lucas-Shelton","Maacama  S.p.A. Marine ecology","Malawi Rift   S.A. de C.V. Express","Malone and Willis","Mar de Coral GmbH and Son's","Mar de Cristal Ltd Abalone","Mar de Cristal S.A. de C.V.","Mar de Cristal ОАО","Mar del Oeste -","Mar del Placer Plc","Marine Muse Pic Marine ecology","Martinez","Matthews and White","Meadows","Melanippe GmbH & Co. KG","Merritt-Austin","Montes","Murphy-Russell","Nagaland Sea Catch Ltd. Liability Co Logistics","Norwegian Fjord  S.A. de C.V. Brothers","Náutica del Mar GmbH & Co. KG","Ocean Quest S.A. de C.V.","Océano del Este Eel","Ola de la Costa AS","PacificPlates S.A. de C.V.","Phillips and Moody","Playa de Arena Ltd. Liability Co","Playa de la Luna Starfish","Portuguese Sea Bass & N.V. Logistics","Punjab  Market Ltd. Liability Co Brothers","Punjab s Pic Express","Reese","Reyes-Kelly","Rogers-Robinson","Romero Ltd and Son's","Rubio-Evans","Rufiji Delta  Limited Liability Company","Sanchez PLC","Sander Ltd. Liability Co Solutions","Sea Striders Kelp BV Solutions","SeaSelect Foods Salt spray","SeaSolutions Dry dock OJSC Transit","SeaSolutions Leska Kga Worldwide","Seashell Sanctum Co Family","Selkie GmbH Marine life","Shepherd and Phillips","SilverScales Ltd. Liability Co","Simon and Farmer","Singleton Ltd","Smith and Harrison","Smith and Scott","Spanish Shrimp A/S Marine","Sullivan","Taylor","Thetis Ltd. Liability Co","Thompson","TideTurner Tidepool Co Enterprises","Tucker-Turner","Turkish Calamari LLC Shipping","Turkish Calamari Plc ship","Uttar Pradesh Sea  Ges.m.b.H. Industrial","Uttar Pradesh Sea  United","Velazquez-Harris","Vespuci Sandbar Sp Brothers","Walker-Lozano","Webb and Martin","Werner-Ortiz","West Bengal  Co _","West Fish  GmbH Transport","Wise and Fuentes","Wright LLC","Young and Ramos","hǎi mǎ S.p.A. Transport","hǎi zhé S.A. de C.V.","jīn qiāng yú AG","mán yú BV Coral Reef"],"type.x":["Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner","Beneficial Owner"],"weights":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,2,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,2,1,3,1,1,1,1,1,1,1,3,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,2,1,1,1,1,1,2,1,1,1,1,1,1,3,1,1,1,1,1,2,3,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","color":{"background":"pink","border":"red"},"physics":false},"manipulation":{"enabled":false},"edges":{"arrows":"to","smooth":false},"physics":{"stabilization":false},"layout":{"randomSeed":123}},"groups":null,"width":null,"height":null,"idselection":{"enabled":true,"style":"width: 150px; height: 26px","useLabels":true,"main":"Select by id"},"byselection":{"enabled":false,"style":"width: 150px; height: 26px","multiple":false,"hideColor":"rgba(200,200,200,0.5)","highlight":false},"main":null,"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","igraphlayout":{"type":"square"},"highlight":{"enabled":true,"hoverNearest":false,"degree":1,"algorithm":"all","hideColor":"rgba(200,200,200,0.5)","labelOnly":true},"collapse":{"enabled":false,"fit":false,"resetHighlight":true,"clusterOptions":null,"keepCoord":true,"labelSuffix":"(cluster)"},"legend":{"width":0.2,"useGroups":true,"position":"left","ncol":1,"stepX":100,"stepY":100,"zoom":true}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="companies-that-have-registered-in-multiple-countries" class="level3">
+<h3 class="anchored" data-anchor-id="companies-that-have-registered-in-multiple-countries">Companies that have registered in multiple countries</h3>
+<p>While it is true that companies are typically registered in the country where they are headquartered or where they conduct their primary operations, it is not unheard of for companies to be registered in multiple countries. Nevertheless for our visualisation, we wish to identify such companies as such situations may not be entirely normal and these companies may potentially breach some form of legality.</p>
+<p>The bar chart below shows the companies that have registered in more than one country. It reveals that Aqua Aura SE marine Life has the highest number of countries it registers in (8 countries in total). This is followed by Transit Limited Liability Company as well as Tamil Nadu S A/S, with both registered in 4 countries each.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Derive specific edge table and filter all companies</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>mc3_edges_country <span class="ot">&lt;-</span> mc3_edges_bysource <span class="sc">%&gt;%</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span> (source, country, type.y) <span class="sc">%&gt;%</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(source) <span class="sc">%&gt;%</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(type.y <span class="sc">==</span> <span class="st">"Company"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Filter companies that are registered in more than 1 country</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>mc3_edges_country_filtered_one <span class="ot">&lt;-</span> <span class="fu">subset</span>(mc3_edges_country, <span class="fu">ave</span>(source, source, <span class="at">FUN =</span> length) <span class="sc">&gt;</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mc3_edges_country_filtered_one, <span class="fu">aes</span>(<span class="at">x =</span> source)) <span class="sc">+</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Companies"</span>) <span class="sc">+</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"No of countries registered"</span>) <span class="sc">+</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">pretty_breaks</span>(<span class="at">n =</span> <span class="dv">5</span>)) <span class="sc">+</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="Take-home_Ex03_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>To gather deeper insights, we will drill down to more extreme cases to uncover deeper insights on such companies. The visualisation below focuses on companies which are registered in more than 2 countries. From the network plot, we can pick up the countries that the company registers in. In the case of Aqua Aura SE Marine Life, this company has registered in 8 countries - Oceanus, Coralmarica, Alverossia, Nalakond, Rio Isla, Talandria, Icarnia and Isliandor.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Filter companies that are registered in more than 2 countries</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>mc3_edges_country_filtered <span class="ot">&lt;-</span> <span class="fu">subset</span>(mc3_edges_country, <span class="fu">ave</span>(source, source, <span class="at">FUN =</span> length) <span class="sc">&gt;</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Create corresponding nodes table out of the edges table</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>id1_con <span class="ot">&lt;-</span> mc3_edges_country_filtered <span class="sc">%&gt;%</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(source) <span class="sc">%&gt;%</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">id =</span> source)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>id2_con <span class="ot">&lt;-</span> mc3_edges_country_filtered <span class="sc">%&gt;%</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(country) <span class="sc">%&gt;%</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">id =</span> country)</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>mc3_nodes_country_filtered <span class="ot">&lt;-</span> <span class="fu">rbind</span>(id1_con, id2_con) <span class="sc">%&gt;%</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#prep format for plotting</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>mc3_edges_country_filtered <span class="ot">&lt;-</span> mc3_edges_country_filtered <span class="sc">%&gt;%</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rename</span>(<span class="at">from =</span> source) <span class="sc">%&gt;%</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rename</span>(<span class="at">to =</span> country) <span class="sc">%&gt;%</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(from<span class="sc">!=</span>to) <span class="sc">%&gt;%</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Plot interactive graph</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">visNetwork</span>(mc3_nodes_country_filtered, mc3_edges_country_filtered) <span class="sc">%&gt;%</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">visNodes</span>(<span class="at">color =</span> <span class="fu">list</span>(<span class="at">background =</span> <span class="st">"lightgreen"</span>, <span class="at">border =</span> <span class="st">"orange"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">visEdges</span>(<span class="at">arrows =</span> <span class="st">"from"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">visIgraphLayout</span>(<span class="at">layout =</span> <span class="st">"layout_with_gem"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">visOptions</span>(<span class="at">highlightNearest =</span> <span class="cn">TRUE</span>, <span class="at">nodesIdSelection =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">visLegend</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">visLayout</span>(<span class="at">randomSeed =</span> <span class="dv">123</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="visNetwork html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-a2778e0bacd59982918e" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-a2778e0bacd59982918e">{"x":{"nodes":{"id":["Aqua Aura SE Marine life","Bahía del Sol Corporation","Bay of Bengal's Ltd. Liability Co","Diao yu  BV Logistics","Diao yu bi sai  BV","Jammu S.A. de C.V.","Manipur  Market Ltd. Liability Co","Mar de Coral ОАО","Mar del Paraíso GmbH","Océano del Este Co","Perla del Mar Co","Solutions Limited Liability Company","Tamil Nadu s A/S","Transit Limited Liability Company","Yenisei  Eel GmbH & Co. KG Services","Mawazam","Rio Isla","Icarnia","Oceanus","Nalakond","Coralmarica","Alverossia","Isliandor","Talandria","Novarcticaa","Utoporiana","Korvelonia","Marebak","Zawalinda","Gavanovia","Kondarivakia","Faraluna","Kondanovia","Puerto del Mar","Puerto Sol","Kethilim","Sol y Oceana","Osterivaro","Thessalandia","Brindisola"],"x":[-0.0483482988021329,-0.768357971466571,0.41318336956403,0.162195265475642,-0.543648830808777,-0.195558963190062,-0.392169003995763,-0.642918584444175,-0.33239360955165,-0.109977825721249,0.649102025922302,0.0543538352549482,-0.272816926700883,0.107244144214392,0.725870381427812,-0.434641642904341,0.164180878572059,0.189750340557691,-0.235286142956556,0.320880236371782,0.148129643918492,0.270981008388028,-0.181285436888224,-0.0685250172278282,-1,-0.52897783059553,0.137646290527685,-0.19819588703214,0.287072491321207,-0.817476093391969,-0.856404934262456,-0.921228243848406,-0.312515489385292,-0.452363562005335,0.913382099443477,0.825837365630721,-0.40937625180754,-0.278643095102999,0.975420734250769,1],"y":[-0.0786154120823765,-0.60389681927287,-0.505926143829382,0.420052244317829,-0.00767491538411413,-0.502189530511381,0.305748558399957,0.191314210770343,-0.639202479379859,-0.323190324063292,0.333712198565475,0.20563562601108,0.659329770473912,-0.317251321367818,-0.118247703873003,-0.356311796439322,0.0815389724381417,-0.129188261093422,-0.0927163965308317,0.00893498897385081,-0.53496714400489,-0.309072202432734,0.419576204017316,0.208292016318814,-0.776314915208764,-0.727645971407129,-0.757605295668336,0.10373350832223,0.733892803940118,-0.0501632890101172,0.425143852421723,0.275545395080458,-1,-0.964762004967214,0.442583642531319,0.583647916649734,0.967646501988849,1,-0.27083012836393,-0.0890439111591211],"label":["Aqua Aura SE Marine life","Bahía del Sol Corporation","Bay of Bengal's Ltd. Liability Co","Diao yu  BV Logistics","Diao yu bi sai  BV","Jammu S.A. de C.V.","Manipur  Market Ltd. Liability Co","Mar de Coral ОАО","Mar del Paraíso GmbH","Océano del Este Co","Perla del Mar Co","Solutions Limited Liability Company","Tamil Nadu s A/S","Transit Limited Liability Company","Yenisei  Eel GmbH & Co. KG Services","Mawazam","Rio Isla","Icarnia","Oceanus","Nalakond","Coralmarica","Alverossia","Isliandor","Talandria","Novarcticaa","Utoporiana","Korvelonia","Marebak","Zawalinda","Gavanovia","Kondarivakia","Faraluna","Kondanovia","Puerto del Mar","Puerto Sol","Kethilim","Sol y Oceana","Osterivaro","Thessalandia","Brindisola"]},"edges":{"from":["Aqua Aura SE Marine life","Aqua Aura SE Marine life","Aqua Aura SE Marine life","Aqua Aura SE Marine life","Aqua Aura SE Marine life","Aqua Aura SE Marine life","Aqua Aura SE Marine life","Aqua Aura SE Marine life","Aqua Aura SE Marine life","Bahía del Sol Corporation","Bahía del Sol Corporation","Bahía del Sol Corporation","Bay of Bengal's Ltd. Liability Co","Bay of Bengal's Ltd. Liability Co","Bay of Bengal's Ltd. Liability Co","Diao yu  BV Logistics","Diao yu  BV Logistics","Diao yu  BV Logistics","Diao yu bi sai  BV","Diao yu bi sai  BV","Diao yu bi sai  BV","Jammu S.A. de C.V.","Jammu S.A. de C.V.","Jammu S.A. de C.V.","Manipur  Market Ltd. Liability Co","Manipur  Market Ltd. Liability Co","Manipur  Market Ltd. Liability Co","Mar de Coral ОАО","Mar de Coral ОАО","Mar de Coral ОАО","Mar del Paraíso GmbH","Mar del Paraíso GmbH","Mar del Paraíso GmbH","Océano del Este Co","Océano del Este Co","Océano del Este Co","Perla del Mar Co","Perla del Mar Co","Perla del Mar Co","Solutions Limited Liability Company","Solutions Limited Liability Company","Solutions Limited Liability Company","Tamil Nadu s A/S","Tamil Nadu s A/S","Tamil Nadu s A/S","Tamil Nadu s A/S","Transit Limited Liability Company","Transit Limited Liability Company","Transit Limited Liability Company","Transit Limited Liability Company","Yenisei  Eel GmbH & Co. KG Services","Yenisei  Eel GmbH & Co. KG Services","Yenisei  Eel GmbH & Co. KG Services"],"to":["Mawazam","Rio Isla","Icarnia","Oceanus","Nalakond","Coralmarica","Alverossia","Isliandor","Talandria","Novarcticaa","Utoporiana","Mawazam","Coralmarica","Korvelonia","Nalakond","Nalakond","Marebak","Zawalinda","Oceanus","Marebak","Gavanovia","Utoporiana","Korvelonia","Marebak","Oceanus","Marebak","Isliandor","Kondarivakia","Oceanus","Faraluna","Oceanus","Kondanovia","Puerto del Mar","Oceanus","Marebak","Coralmarica","Puerto Sol","Nalakond","Kethilim","Nalakond","Marebak","Oceanus","Marebak","Isliandor","Sol y Oceana","Osterivaro","Nalakond","Oceanus","Alverossia","Coralmarica","Thessalandia","Brindisola","Nalakond"],"type.y":["Company","Company","Company","Company","Company","Company","Company","Company","Company","Company","Company","Company","Company","Company","Company","Company","Company","Company","Company","Company","Company","Company","Company","Company","Company","Company","Company","Company","Company","Company","Company","Company","Company","Company","Company","Company","Company","Company","Company","Company","Company","Company","Company","Company","Company","Company","Company","Company","Company","Company","Company","Company","Company"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","color":{"background":"lightgreen","border":"orange"},"physics":false},"manipulation":{"enabled":false},"edges":{"arrows":"from","smooth":false},"physics":{"stabilization":false},"layout":{"randomSeed":123}},"groups":null,"width":null,"height":null,"idselection":{"enabled":true,"style":"width: 150px; height: 26px","useLabels":true,"main":"Select by id"},"byselection":{"enabled":false,"style":"width: 150px; height: 26px","multiple":false,"hideColor":"rgba(200,200,200,0.5)","highlight":false},"main":null,"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","igraphlayout":{"type":"square"},"highlight":{"enabled":true,"hoverNearest":false,"degree":1,"algorithm":"all","hideColor":"rgba(200,200,200,0.5)","labelOnly":true},"collapse":{"enabled":false,"fit":false,"resetHighlight":true,"clusterOptions":null,"keepCoord":true,"labelSuffix":"(cluster)"},"legend":{"width":0.2,"useGroups":true,"position":"left","ncol":1,"stepX":100,"stepY":100,"zoom":true}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="word-cloud-on-product-services" class="level3">
+<h3 class="anchored" data-anchor-id="word-cloud-on-product-services">Word cloud on product services</h3>
+<p>The word cloud provides an overview of the range of product services provided by the companies. It also provides us with an indication of the more common business groups and the product mix.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>column_values <span class="ot">&lt;-</span> mc3_edges_toprevenue<span class="sc">$</span>product_services</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Create a Corpus</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>corpus <span class="ot">&lt;-</span> <span class="fu">Corpus</span>(<span class="fu">VectorSource</span>(column_values))</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Preprocess the words</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>corpus <span class="ot">&lt;-</span> <span class="fu">tm_map</span>(corpus, <span class="fu">content_transformer</span>(tolower))</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>corpus <span class="ot">&lt;-</span> <span class="fu">tm_map</span>(corpus, removePunctuation)</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>corpus <span class="ot">&lt;-</span> <span class="fu">tm_map</span>(corpus, removeNumbers)</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="co">#Add custom stopwords</span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>custom_stopwords <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"products"</span>, <span class="st">"systems"</span>, <span class="st">"including"</span>, <span class="st">"solutions"</span>, <span class="st">"industrial"</span>, <span class="st">"wide"</span>, <span class="st">"short"</span>, <span class="st">"fat"</span>, <span class="st">"die"</span>, <span class="st">"related"</span>, <span class="st">"equipment"</span>, <span class="st">"range"</span>, <span class="st">"offers"</span>, <span class="st">"kits"</span>, <span class="st">"frozen"</span>, <span class="st">"wild"</span>, <span class="st">"kit"</span>, <span class="st">"soft"</span>, <span class="st">"hard"</span>, <span class="st">"non"</span>, <span class="st">"cooked"</span>, <span class="st">"ltl"</span>, <span class="st">"dust"</span>, <span class="st">"full"</span>, <span class="st">"processing"</span>, <span class="st">"high"</span>, <span class="st">"dried"</span>, <span class="st">"far"</span>, <span class="st">"low"</span>, <span class="st">"roll"</span>, <span class="st">"flat"</span>, <span class="st">"raw"</span>, <span class="st">"source"</span>, <span class="st">"lcl"</span>, <span class="st">"men"</span>, <span class="st">"strip"</span>, <span class="st">"include"</span>, <span class="st">"multi"</span>, <span class="st">"natural"</span>, <span class="st">"general"</span>, <span class="st">"unit"</span>, <span class="st">"care"</span>, <span class="st">"hot"</span>, <span class="st">"rare"</span>, <span class="st">"dry"</span>, <span class="st">"set"</span>, <span class="st">"provides"</span>, <span class="st">"involved"</span>, <span class="st">"ends"</span>, <span class="st">"chum"</span>, <span class="st">"freelance"</span>, <span class="st">"hvac"</span>, <span class="st">"etc"</span>)</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>corpus <span class="ot">&lt;-</span> <span class="fu">tm_map</span>(corpus, removeWords, <span class="fu">stopwords</span>(<span class="st">"english"</span>))</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>corpus <span class="ot">&lt;-</span> <span class="fu">tm_map</span>(corpus, removeWords, custom_stopwords)</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a><span class="co">#Create a term document matrix</span></span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>tdm <span class="ot">&lt;-</span> <span class="fu">TermDocumentMatrix</span>(corpus)</span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a><span class="co">#Convert the term document matrix to a matrix</span></span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(tdm)</span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a><span class="co">#Calculate word frequencies</span></span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>word_freq <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">rowSums</span>(m), <span class="at">decreasing =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a><span class="co">#Create the word cloud</span></span>
+<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a><span class="fu">wordcloud</span>(<span class="at">words =</span> <span class="fu">names</span>(word_freq), <span class="at">freq =</span> word_freq, <span class="at">scale =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">1</span>), <span class="at">random.order =</span> <span class="cn">FALSE</span>, <span class="at">colors =</span> <span class="fu">brewer.pal</span>(<span class="dv">8</span>, <span class="st">"Dark2"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="Take-home_Ex03_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
