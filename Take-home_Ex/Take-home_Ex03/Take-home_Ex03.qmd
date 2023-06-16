@@ -156,21 +156,32 @@ ggplot(data = mc3_nodes, aes(x = type, fill = type)) +
 
 ### Data Wrangling
 
-We would need to extract the lists of entities found under the "Source" column in the edges table, and itemise them in separate rows. This is done by splitting the string in the lists into a new edges table, after removing whitespaces and irrelevant characters.
+We would need to extract the embedded lists of entities found under the "Source" column in the original edges table, and itemise into individual rows. This is done by splitting the string in the embedded lists into edges sub-table, and removing whitespaces and irrelevant characters.
 
 ```{r}
 #| code-fold: true
 #| warning: false
 
-# Break up the lists in the edge file by splitting the string
-mc3_edge_broken <- unnest(mc3_edges, source = strsplit(as.character(source), "\\(|\\,|\\)"))
+#Extract lists from the edges table
+mc3_edge_unclean <- mc3_edges %>%
+  filter(substr(source,1,2) %in% "c(")
+  
 ```
 
 ```{r}
 #| code-fold: true
 #| warning: false
 
-# Remove whitespaces amd filter records with "c" value 
+# Break up the lists in the edge file by splitting the string
+mc3_edge_broken <- unnest(mc3_edge_unclean, source = strsplit(as.character(source), "\\(|\\,|\\)"))
+```
+
+```{r}
+#| code-fold: true
+#| warning: false
+
+# Remove whitespaces amd filter records with "c" value
+#Create edges table incorporating the unlisted values
 mc3_edge_broken <- mc3_edge_broken %>%
   mutate(source = gsub("\"", "", source)) %>%
   filter(source !="c") %>%
@@ -183,12 +194,29 @@ mc3_edge_broken <- mc3_edge_broken %>%
 
 ```
 
+From the original edges table, we will remove the lists, and subsequently concatenate the itemised values which were extracted from the embedded lists. This will form the clean edges table.
+
+```{r}
+#| code-fold: true
+#| warning: false
+
+#Create edges table without embedded lists from original edges table
+mc3_edges_without_list <- mc3_edges %>%
+  filter(!substr(source,1,2) %in% "c(") %>%
+  distinct()
+
+#Combine new edges table with edges table incorporated with the unlisted values, to form a combined edges table.  
+mc3_edges_combined <- rbind(mc3_edges_without_list, mc3_edge_broken)
+
+
+```
+
 Next we will join the edges table with nodes table into combined edge table by mapping edge "source" column in edge table with "id" column in nodes table. This will provide us with the information on the type of "source" entities in the edges table. The edges table will be used to derive the data for subsequent visualisation.
 
 ```{r}
 #| code-fold: true
 #| warning: false
-mc3_edges_bysource <- left_join(mc3_edge_broken, mc3_nodes,
+mc3_edges_bysource <- left_join(mc3_edges_combined, mc3_nodes,
                                by = c("source" = "id"))
   
 ```
@@ -204,7 +232,6 @@ mc3_edges_bysource1 <- mc3_edges_bysource %>%
   filter(source!=target) %>%
   rename(source_type = type.y) %>%
   rename(target_type = type.x) %>%
-  #filter(revenue_omu != "NA") %>%
   filter(product_services != "Unknown") %>%
   filter(product_services != "character(0)") %>%
   ungroup()
@@ -257,7 +284,7 @@ treemap(mc3_edges_toprevenue_filtered,
 
 One of the anormalies that we can detect is the number of companies the individual entities own. We can be suspicious of these individuals if they own an exceptionally high number of companies.
 
-In this visualisation, we can observe that there are seven individuals (Richard Smith, Jennifer Smith, James Smith, Jennifer Taylor, Micheal Williams, John Williams, Ashley Harris) who own the largest number of companies (total of 8 companies each). We can also infer that there are two big families among the above list - the Smith family and Williams family. In addition, we can detect that Michael Williams and David Jones co-own Garcia, as well as Ashley Harris and Amy Martinez co-own Davis.
+In this visualisation on individuals who own more than 5 companies, we observe that the individual who owns the largest number of companies is John Smith (owns a total of 11 companies). This is followed by Micheal Johnson and Jennifer Smith who owns 9 and 8 companies respectively. We can also infer that this group of owners are dominated by the presence of the Smith family.
 
 ```{r}
 #| code-fold: true
@@ -279,7 +306,10 @@ mc3_edges_indivowners <- mc3_edges_bysource %>%
 #| warning: false
 
 #Filter individuals who own more 5 companies
-mc3_edges_indivowners_filtered <- subset(mc3_edges_indivowners, ave(sc, sc, FUN = length) > 5)
+mc3_edges_indivowners_filtered <- mc3_edges_indivowners %>%
+  group_by(sc) %>%
+  filter(n() > 5) %>%
+  ungroup()
 
 ```
 
@@ -331,7 +361,7 @@ visNetwork(mc3_nodes_indivowners_filtered, mc3_edges_indivowners_filtered) %>%
 
 While it is true that companies are typically registered in the country where they are headquartered or where they conduct their primary operations, it is not unheard of for companies to be registered in multiple countries. Nevertheless for our visualisation, we wish to identify such companies as such situations may not be entirely normal and these companies may potentially breach some form of legality.
 
-The bar chart below shows the companies that have registered in more than one country. It reveals that Aqua Aura SE marine Life has the highest number of countries it registers in (8 countries in total). This is followed by Transit Limited Liability Company as well as Tamil Nadu S A/S, with both registered in 4 countries each.
+The bar chart below shows the companies that have registered in more than one country. It reveals that Aqua Aura SE marine Life has the highest number of countries it registers in (9 countries in total). This is followed by Transit Limited Liability Company as well as Tamil Nadu S A/S, with both registered in 4 countries each.
 
 ```{r}
 #| code-fold: true
@@ -351,8 +381,10 @@ mc3_edges_country <- mc3_edges_bysource %>%
 #| warning: false
 
 #Filter companies that are registered in more than 1 country
-mc3_edges_country_filtered_one <- subset(mc3_edges_country, ave(source, source, FUN = length) > 1)
-
+mc3_edges_country_filtered_one <- mc3_edges_country %>%
+  group_by(source) %>%
+  filter(n() > 1) %>%
+  ungroup()
 ```
 
 ```{r}
@@ -367,15 +399,17 @@ ggplot(data = mc3_edges_country_filtered_one, aes(x = source)) +
   theme(axis.text.y = element_text(size = 4))
 ```
 
-To gather deeper insights, we will drill down to more extreme cases to uncover deeper insights on such companies. The visualisation below focuses on companies which are registered in more than 2 countries. From the network plot, we can pick up the countries that the company registers in. In the case of Aqua Aura SE Marine Life, this company has registered in 8 countries - Oceanus, Coralmarica, Alverossia, Nalakond, Rio Isla, Talandria, Icarnia and Isliandor.
+To gather deeper insights, we will drill down to more extreme cases to uncover deeper insights on such companies. The visualisation below focuses on companies which are registered in more than 2 countries. From the network plot, we can pick up the names of the countries that companies register in. In the case of Aqua Aura SE Marine Life, this company has registered in the 9 countries - Oceanus, Coralmarica, Alverossia, Nalakond, Rio Isla, Talandria, Icarnia, Mawazam and Isliandor.
 
 ```{r}
 #| code-fold: true
 #| warning: false
-
+ 
 #Filter companies that are registered in more than 2 countries
-mc3_edges_country_filtered <- subset(mc3_edges_country, ave(source, source, FUN = length) > 2)
-
+mc3_edges_country_filtered <- mc3_edges_country %>%
+  group_by(source) %>%
+  filter(n() > 2) %>%
+  ungroup()
 ```
 
 ```{r}
@@ -423,7 +457,7 @@ visNetwork(mc3_nodes_country_filtered, mc3_edges_country_filtered) %>%
 
 ### Word cloud on product services
 
-The word cloud provides an overview of the range of product services provided by the companies. It also provides us with an indication of the more common business groups and the product mix.
+The word cloud provides an overview of the range of product services provided by the companies. It also provides us with an indication of the more common business groups and the product mix. We can infer that most of the companies are dealing in food related services, in particular seafood and fish. In terms of the fish types, the salmon would seem to be the most common.
 
 ```{r}
 #| code-fold: true
