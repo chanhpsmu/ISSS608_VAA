@@ -211,7 +211,7 @@ mc3_edges_combined <- rbind(mc3_edges_without_list, mc3_edge_broken)
 
 ```
 
-Next we will join the edges table with nodes table into combined edge table by mapping edge "source" column in edge table with "id" column in nodes table. This will provide us with the information on the type of "source" entities in the edges table. The edges table will be used to derive the data for subsequent visualisation.
+Next we will join the edges table with nodes table into combined edge table by mapping edge "source" column in edge table with "id" column in nodes table. This will provide us with the attribute details of the "source" entities in the edges table. Next, we assign "Company" type to the "source" entities on assumption that they are companies. The edges table will be used to derive the data for subsequent visualisation.
 
 ```{r}
 #| code-fold: true
@@ -222,11 +222,23 @@ mc3_edges_bysource <- left_join(mc3_edges_combined, mc3_nodes,
 ```
 
 ```{r}
+#Assign source type as "Company"
+mc3_edges_bysource$type.y <- "Company"
+
+```
+
+# Visualisation
+
+### Countries registered by top revenue companies
+
+The treemap is constructed based on the top 50 companies that generates the highest revenues. It is observed that, of the top 50 companies with the highest revenues, more than half of the total revenues are earned by companies registered in ZH country. The top 3 highest earning companies are Jones LLC, Patton Ltd and Morgan Group. The diagram also revealed that Assam Limited Liability Company and Aqua Advancements Sashimi SE Express are the highest earning company in Utoporiana country and Oceanus country respectively.
+
+```{r}
 #| code-fold: true
 #| warning: false
 
 #Rename relevant columns as "source type" and "target type"
-#Filter combined edge table by removing unknown and NA values from relevant columns.
+#Filter combined edge table by removing "unknown" and "character(0)" values under "Product_services" column for subsequent relevant visualisation.
 mc3_edges_bysource1 <- mc3_edges_bysource %>%
   group_by(source, target, type.y, type.x, country, weights, revenue_omu, product_services) %>%
   filter(source!=target) %>%
@@ -236,12 +248,6 @@ mc3_edges_bysource1 <- mc3_edges_bysource %>%
   filter(product_services != "character(0)") %>%
   ungroup()
 ```
-
-# Visualisation
-
-### Countries registered by top revenue companies
-
-The treemap is constructed based on the top 50 companies that generates the highest revenues. It is observed that, of the top 50 companies with the highest revenues, almost half of the total revenues are earned by companies registered in ZH country. The 2 highest earning companies are Jones LLC and Patton Ltd. The diagram also revealed that Assam Limited Liability Company and Aqua Advancements Sashimi SE Express are the highest earning company in Utoporiana country and Oceanus country respectively.
 
 ```{r}
 #| code-fold: true
