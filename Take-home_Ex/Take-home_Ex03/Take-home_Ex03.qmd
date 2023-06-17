@@ -222,6 +222,9 @@ mc3_edges_bysource <- left_join(mc3_edges_combined, mc3_nodes,
 ```
 
 ```{r}
+#| code-fold: true
+#| warning: false
+
 #Assign source type as "Company"
 mc3_edges_bysource$type.y <- "Company"
 
